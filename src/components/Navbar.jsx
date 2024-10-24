@@ -1,5 +1,8 @@
 import React from 'react'
 import logo from '../assets/images/logo.png'
+import {NavLink} from 'react-router-dom'
+
+
 
 const Navbar = () => {
   return (
@@ -10,43 +13,45 @@ const Navbar = () => {
             className="flex flex-1 items-center justify-center md:items-stretch md:justify-start"
           >
             {/*<!-- Logo -->*/}
-            <a className="flex flex-shrink-0 items-center mr-4" href="/index.html">
+            <NavLink className="flex flex-shrink-0 items-center mr-4" to="/index.html">
               <img
                 className="h-10 w-auto"
                 src= {logo}
                 alt="Dorm Connection"
               />
               <span className="hidden md:block text-white text-2xl font-bold ml-2"
-                >Browse Listing</span
+                >BU Swaps</span
               >
-            </a>
+            </NavLink>
             <div className="md:ml-auto">
               <div className="flex space-x-2">
-                <a
-                  href="/index.html"
-                  className="text-white bg-black hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
-                  >Home</a
+                <NavLink
+                  to="/"
+
+                  className={({ isActive}) => isActive ?'text-white bg-black hover:bg-gray-900 hover:text-white rounded-md px-3 py-2' : 'text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2'}
+                  
+                  >Home
+                </NavLink>
+                <NavLink
+                  to="/listings"
+                  className={({ isActive}) => isActive ?'text-white bg-black hover:bg-gray-900 hover:text-white rounded-md px-3 py-2' : 'text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2'}
+                  >Browse Listings</NavLink
                 >
-                <a
-                  href="/jobs.html"
-                  className="text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
-                  >Browse Listing</a
-                >
-                <a
-                  href="/add-job.html"
-                  className="text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
-                  >Add Listing</a
-                >
-                <a
-                  href="/add-job.html"
-                  className="text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
-                  >Dorms</a
-                >
-                <a
-                  href="/add-job.html"
-                  className="text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
-                  >Login</a
-                >
+                <NavLink
+                  to="/add-listings"
+                  className={({ isActive}) => isActive ?'text-white bg-black hover:bg-gray-900 hover:text-white rounded-md px-3 py-2' : 'text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2'}
+                  >Add Listing
+                  </NavLink>
+                <NavLink
+                  to="/dorms"
+                  className={({ isActive}) => isActive ?'text-white bg-black hover:bg-gray-900 hover:text-white rounded-md px-3 py-2' : 'text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2'}
+                  >Dorms
+                  </NavLink>
+                <NavLink
+                  to="/login"
+                  className={({ isActive}) => isActive ?'text-white bg-black hover:bg-gray-900 hover:text-white rounded-md px-3 py-2' : 'text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2'}
+                  >Login
+                  </NavLink>
               </div>
             </div>
           </div>

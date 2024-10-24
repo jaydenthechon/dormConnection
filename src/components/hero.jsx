@@ -1,6 +1,6 @@
 import React from 'react'
 
-const hero = (props) => {
+const Hero = () => {
   return (
     <section className="bg-indigo-700 py-20 mb-4">
       <div
@@ -10,10 +10,10 @@ const hero = (props) => {
           <h1
             className="text-4xl font-extrabold text-white sm:text-5xl md:text-6xl"
           >
-            { props.title }
+            Dorm Connection
           </h1>
           <p className="my-4 text-xl text-white">
-            { props.subtitle }
+            An easy way to find direct swaps on BU campus
           </p>
         </div>
       </div>
@@ -21,4 +21,4 @@ const hero = (props) => {
   )
 }
 
-export default hero
+export default Hero
