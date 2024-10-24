@@ -3,6 +3,7 @@ import jobs from '../jobs.json'
 import Listing from './Listing'
 import{useState, useEffect} from 'react'
 
+
 const Listings = ({isHome = false}) => {
     const[listing, setListing] = useState([])
     const[loading, setLoading] = useState(true)
