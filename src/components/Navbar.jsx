@@ -10,12 +10,12 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-indigo-700 border-b border-indigo-500">
+    <nav className="bg-indigo-700 border-b border-indigo-500 fixed top-0 left-0 w-full z-50">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
-            <NavLink className="flex items-center mr-4" to="/">
+            <NavLink className="flex items-center mr-4" to="/index.html">
               <img className="h-10 w-auto" src={logo} alt="Dorm Connection" />
               <span className="hidden md:block text-white text-2xl font-bold ml-2">
                 BU Swaps
