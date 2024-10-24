@@ -4,7 +4,7 @@ import HomePage from './pages/HomePage'
 import MainLayout from './layouts/MainLayout'
 import ListingPage from './pages/ListingPage'
 import NotFound from './pages/NotFound'
-import SingleListing from './pages/singleListing'
+import SingleListing, {listingLoader} from './pages/singleListing'
 
 
 const router = createBrowserRouter(
@@ -12,7 +12,7 @@ const router = createBrowserRouter(
   <Route path='/' element={<MainLayout />}>
     <Route index element={<HomePage />} />
     <Route path='/listings' element={<ListingPage/>} />
-    <Route path='/listings/:id' element={<SingleListing/>} />
+    <Route path='/listings/:id' element={<SingleListing/>} loader={listingLoader}/>
     <Route path='*' element={<NotFound />} />
   </Route>
   )

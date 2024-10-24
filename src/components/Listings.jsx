@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import jobs from '../jobs.json';
 import Listing from './Listing';
 
 const Listings = ({ isHome = false }) => {
@@ -9,9 +8,9 @@ const Listings = ({ isHome = false }) => {
 
   useEffect(() => {
     const fetchListings = async () => {
-      const apiURL = isHome ? '/api/jobs?_limit=3' : '/api/jobs';
+      const apiUrl = isHome ? '/api/jobs?_limit=3' : '/api/jobs';
       try {
-        const res = await fetch(apiURL);
+        const res = await fetch(apiUrl);
         const data = await res.json();
         setListing(data);
       } catch (error) {
@@ -68,8 +67,8 @@ const Listings = ({ isHome = false }) => {
             <h2>Loading...</h2>
           ) : (
             <>
-              {listing.map((job) => (
-                <Listing key={job.id} job={job} />
+              {listing.map((jobs) => (
+                <Listing key={jobs.id} job={jobs} />
               ))}
             </>
           )}
