@@ -7,7 +7,7 @@ const Rooms = () => {
       <div className="container-xl lg:container m-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg">
           <div className="bg-gray-100 p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold">Looking for Link Swap?</h2>
+            <h2 className="text-2xl font-bold">Looking for Swap?</h2>
             <p className="mt-2 mb-4">
               Browse our listings and reach out to the residents!
             </p>
@@ -19,7 +19,7 @@ const Rooms = () => {
             </Link>
           </div>
           <div className="bg-indigo-100 p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold">Offer Link Swap</h2>
+            <h2 className="text-2xl font-bold">Offer Room</h2>
             <p className="mt-2 mb-4">
               List your dorm so people can swap with you
             </p>
