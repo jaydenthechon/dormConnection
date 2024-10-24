@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 const Hero = () => {
   return (
     <section className="bg-indigo-700 py-20 mb-4">
