@@ -11,7 +11,7 @@ const SingleDorm = () => {
     <>
       <section>
         <div className="container m-auto py-6 px-6">
-          <Link to="/Dorms" className="text-indigo-500 hover:text-indigo-600 flex items-center">
+          <Link to="/Explore-Dorms" className="text-indigo-500 hover:text-indigo-600 flex items-center">
             <FaArrowLeft className='mr-2' /> Back to Dorms
           </Link>
         </div>
@@ -22,11 +22,11 @@ const SingleDorm = () => {
           <div className="grid grid-cols-1 md:grid-cols-70/30 w-full gap-6">
             <main>
               <div className="bg-white p-6 rounded-lg shadow-md text-center md:text-left">
-                <div className="text-gray-500 mb-4">{Dorms.building}</div>
-                <h1 className="text-3xl font-bold mb-4">{Dorms.DormType} ({Dorms.occupancy})</h1>
+                <div className="text-gray-500 mb-4">{Dorms.location}</div>
+                <h1 className="text-3xl font-bold mb-4">{Dorms.building}</h1>
                 <div className="text-gray-500 mb-4 flex align-middle justify-center md:justify-start">
                   <FaMapMarker className='text-orange-700 mr-1' />
-                  <p className="text-orange-700">{Dorms.address}, Floor {Dorms.floorNumber}</p>
+                  <p className="text-orange-700">{Dorms.address}, Boston MA, 02215</p>
                 </div>
               </div>
 
@@ -34,22 +34,23 @@ const SingleDorm = () => {
                 <h3 className="text-indigo-800 text-lg font-bold mb-6">Dorm Description</h3>
                 <p className="mb-4">{Dorms.description}</p>
                 <h3 className="text-indigo-800 text-lg font-bold mb-2">Yearly Cost</h3>
-                <p className="mb-4">{Dorms.cost} / Year</p>
+                <p className="mb-4">{Dorms.currentCost} / Year</p>
+                <h3 className="text-indigo-800 text-lg font-bold mb-2">Dining Plan Required?</h3>
+                <p className="mb-4">{Dorms.diningPlanRequired}</p>
               </div>
 
               <div className="bg-white p-6 rounded-lg shadow-md mt-6">
-                <h3 className="text-indigo-800 text-lg font-bold mb-6">Features</h3>
-                <p className="mb-4">{Dorms.features.join(', ')}</p>
+                <h3 className="text-indigo-800 text-lg font-bold mb-6">T-Stop and Dining Hall</h3>
+                <p className="mb-4">Closest T-Stop: {Dorms.tStop}</p>
+                <p className="mb-4">Closest Dining Hall: {Dorms.diningHall}</p>
               </div>
             </main>
 
             <aside>
               <div className="bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-bold mb-6">Roommate Information</h3>
+                <h3 className="text-xl font-bold mb-6">Pictures</h3>
                 <p className="my-2">{Dorms.roommateInfo}</p>
                 <hr className="my-4" />
-                <h3 className="text-xl">Contact Email:</h3>
-                <p className="my-2 bg-indigo-100 p-2 font-bold">{Dorms.contactEmail}</p>
               </div>
             </aside>
           </div>

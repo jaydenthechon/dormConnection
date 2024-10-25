@@ -2,11 +2,11 @@
   "Dorms": [
     {
       "id": "Sleeper",
-      "building": "West Campus (Sleeper Hall)",
+      "building": "Sleeper Hall",
       "address": "275 Babcock Street",
       "description":"One of three towers located in West Campus, Sleeper Hall, is situated steps away from the state of the art FitRec, The Fresh Food Co. at West Campus dining hall, and Nickerson Field.",
       "location":"West Campus",
-      "currentCost": "",
+      "currentCost": "$12,180",
       "diningPlanRequired": "Yes",
       "tStop": "Babcock T Stop",
       "diningHall": "West Dining Hall"
@@ -16,12 +16,12 @@
     },
     {
       "id": "Claflin",
-      "building": "West Campus (Claflin Hall)",
+      "building": "Claflin Hall",
       "address": "273 Babcock Street",
       "description":"One of three towers located in West Campus, Claflin Hall, is situated steps away from the state of the art FitRec, The Fresh Food Co. at West Campus dining hall, and Nickerson Field.",
       "location":"West Campus",
       
-      "currentCost": "",
+      "currentCost": "$12,180",
       "diningPlanRequired": "Yes",
       "tStop": "Babcock T Stop",
       "diningHall": "West Dining Hall"
@@ -31,12 +31,12 @@
     },
     {
       "id": "Rich",
-      "building": "West Campus (Rich Hall)",
+      "building": "Rich Hall",
       "address": "277 Babcock Street",
       "description":"One of three towers located in West Campus, Rich Hall, is situated steps away from the state of the art FitRec, The Fresh Food Co. at West Campus dining hall, and Nickerson Field.",
       "location":"West Campus",
       
-      "currentCost": "",
+      "currentCost": "12,180",
       "diningPlanRequired": "Yes",
       "tStop": "Babcock T Stop",
       "diningHall": "West Dining Hall"
@@ -46,12 +46,13 @@
     },
     {
       "id": "1019",
+      "name": "1019",
       "building": "1019 Commonwealth Ave",
       "address": "1019 Commonwealth Ave",
       "description":"Enjoy the benefits of West Campus in a cozy suite-style residence. 1019 Comm offers six person suites – perfect for large friend groups – with your own common room and bathroom. 1019 Comm is a short walk to Agganis Arena, FitRec, grocery stores, The Fresh Food Co. at West Campus dining hall, and multiple dining options located in Packard’s Corner.",
       "location":"West Campus",
       
-      "currentCost": "",
+      "currentCost": "13,930",
       "diningPlanRequired": "Yes",
       "tStop": "Babcock T Stop",
       "diningHall": "West Dining Hall"
@@ -66,7 +67,7 @@
       "description":"One half of the John Hancock Student Village, 10 Buick Street offers juniors and seniors contemporary accommodations such as they might experience as professionals. “StuVi-1” as it’s known on campus, is close to classrooms, Agganis Arena, FitRec, public transit, BU’s arts-and-culture block, tons of dining options, and a large grocery store. StuVi-1 has 185 four-person apartments, each with four single bedrooms, two bathrooms, a kitchen, and a living/dining area. There are also 31 two-person apartments each with two single bedrooms, a bathroom, kitchen, and living/dining area. Entering freshmen and transfer students are not eligible to live in 10 Buick Street during their first year.",
       "location":"West Campus",
       
-      "currentCost": "",
+      "currentCost": "$21,020 - 21,690",
       "diningPlanRequired": "Optional",
       "tStop": "Babcock T Stop",
       "diningHall": "West Dining Hall"
@@ -81,7 +82,7 @@
       "description":"One of our newest residences, StuVi-2 accommodates 960 residents in two, unique high-rises. The 26-story north tower hosts juniors and seniors in an apartment-style setting, and the 19-story south tower houses sophomores, juniors, and seniors in a suite-style setting. Entering freshmen and transfer students are not eligible to live at 33 Harry Agganis Way during their first year.",
       "location":"West Campus",
       
-      "currentCost": "",
+      "currentCost": "$15,990 - 21,690",
       "diningPlanRequired": "Yes if Suite, otherwise Optional",
       "tStop": "Babcock T Stop",
       "diningHall": "West Dining Hall"
@@ -96,7 +97,7 @@
       "description":"Located in the heart of East Campus right along Commonwealth Avenue, 575 Comm offers students a short walk to classrooms in Questrom, COM, and CAS; The Fresh Food Co. at Marciano Commons; and Kenmore Square. 575 Comm’s convenient location and in-room bathroom makes it a popular option amongst students!",
       "location":"East Campus",
       
-      "currentCost": "",
+      "currentCost": "$12,180",
       "diningPlanRequired": "Yes",
       "tStop": "Blanford St T Stop",
       "diningHall": "Marciano Commons"
@@ -111,7 +112,7 @@
       "description":"610 Beacon Street is located at the heart of Kenmore Square. It is steps away from Fenway Park, restaurants, shops, and the famous Citgo sign. Just steps away you will also find on-campus dining at The Fresh Food Co. at Marciano Commons.",
       "location":"East Campus",
       
-      "currentCost": "",
+      "currentCost": "$13,930 - 17,170",
       "diningPlanRequired": "Yes",
       "tStop": "Kenmore T Stop",
       "diningHall": "Marciano Commons"
@@ -124,7 +125,7 @@
       "description":"Live on one of BU’s most picturesque streets. These charming brownstones are close to classrooms, green space, and the bustle of Comm Ave while retaining a residential neighborhood feel and sense of community. The Bay State Road community buildings are coeducational, with two and three-person double or triple rooms and the occasional single or four-person room mixed in, and residents share a common bathroom on their floor.",
       "location":"Central to East Campus",
       
-      "currentCost": "",
+      "currentCost": "$12,180 - 21,960",
       "diningPlanRequired": "Optional if in Apartment, otherwise Yes",
       "tStop": "East Campus, Blandford St, Kenmore",
       "diningHall": "Warren Towers or Marciano Commons"
@@ -139,7 +140,7 @@
       "description":"Enjoy the best of all worlds. Nearby you’ll find classroom buildings and libraries, Charles River biking and jogging paths, and Kenmore Square and Comm Ave shopping and dining. Choose from shared or single one-bedroom or studio units, equipped with kitchen and bathroom.",
       "location":"Central Campus",
       
-      "currentCost": "",
+      "currentCost": "$16,240 - 21,960",
       "diningPlanRequired": "No",
       "tStop": "Central Campus T Stop",
       "diningHall": "Warren Towers"

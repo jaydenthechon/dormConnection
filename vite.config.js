@@ -13,6 +13,9 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api/, ''),
       }
     }
-  }  // Output directory for the built files
-}
-)
+  },
+  // Output directory for the built files
+  build: {
+    outDir: 'dist',
+  }
+})

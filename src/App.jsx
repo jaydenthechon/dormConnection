@@ -49,7 +49,7 @@ const App = () => {
         <Route path="/add-listings" element={<AddListingPage addListingSubmit={addListing} />} />
         <Route path="/listings/:id" element={<SingleListing />} loader={listingLoader} />
         <Route path="/Explore-Dorms" element={<ExploreDorms />} />
-        <Route path="/SingleDorm/:id" element={<SingleDorm />} loader={dormLoader} />
+        <Route path="/Dorms/:id" element={<SingleDorm />} loader={dormLoader} />
         <Route path="/login" element={<LoginPage onLoginSubmit={handleLogin} />} />
         <Route path="*" element={<NotFound />} />
       </Route>
