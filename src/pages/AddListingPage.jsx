@@ -101,7 +101,8 @@ const AddListingPage = ({ addListingSubmit }) => {
 
     if (!validateForm()) {
         return false // Stop form submission if validation fails
-    }
+    }else{
+
 
     const newListing = {
       building,
@@ -130,7 +131,7 @@ const AddListingPage = ({ addListingSubmit }) => {
         hasPrivateBath
       }
     }
-
+}
     addListingSubmit(newListing)
     navigate('/listings')
   }
