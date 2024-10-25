@@ -16,6 +16,6 @@ export default defineConfig({
   },
   // Output directory for the built files
   build: {
-    outDir: 'dist',
+    outDir: 'build',
   }
 })
