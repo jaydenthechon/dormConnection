@@ -11,7 +11,7 @@ const SingleDorm = () => {
     <>
       <section>
         <div className="container m-auto py-6 px-6">
-          <Link to="/dorms" className="text-indigo-500 hover:text-indigo-600 flex items-center">
+          <Link to="/Dorms" className="text-indigo-500 hover:text-indigo-600 flex items-center">
             <FaArrowLeft className='mr-2' /> Back to Dorms
           </Link>
         </div>
@@ -60,7 +60,7 @@ const SingleDorm = () => {
 };
 
 const dormLoader = async ({ params }) => {
-  const res = await fetch(`/api/dorms/${params.id}`);
+  const res = await fetch(`/api/Dorms/${params.id}`);
   const data = await res.json();
   return data;
 };

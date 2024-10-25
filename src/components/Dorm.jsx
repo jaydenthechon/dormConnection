@@ -38,7 +38,7 @@ const Dorm = ({ dorm }) => {
             <span className="truncate">{dorm.address}</span>
           </div>
           <Link
-            to={`/dorms/${dorm.id}`}
+            to={`/Dorms/${dorm.id}`}
             className="w-[105px] h-[36px] bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg text-center text-sm flex items-center justify-center"
           >
             Read More
