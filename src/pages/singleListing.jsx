@@ -31,13 +31,13 @@ const SingleListing = () => {
             >
               <div className="text-gray-500 mb-4">{listing.building}</div>
               <h1 className="text-3xl font-bold mb-4">
-                {listing.DormType}
+                {listing.TradeDescription}  ({listing.lookingFor})
               </h1>
               <div
                className="text-gray-500 mb-4 flex align-middle justify-center md:justify-start"
               >
                 <FaMapMarker className='text-orange-700 mr-1' />
-                <p className="text-orange-700">{listing.address}</p>
+                <p className="text-orange-700">{listing.address}, Floor {listing.roomNumber}</p>
               </div>
             </div>
 
@@ -53,6 +53,13 @@ const SingleListing = () => {
               <h3 className="text-indigo-800 text-lg font-bold mb-2">Cost Difference</h3>
 
               <p className="mb-4">{listing.costDifference} / Year</p>
+            </div>
+
+            <div className="bg-white p-6 rounded-lg shadow-md mt-6">
+              <h3 className="text-indigo-800 text-lg font-bold mb-6">
+                Features
+              </h3>
+              <p className="mb-4">{listing.dormFeatures.featuresAsString}</p>
             </div>
           </main>
 
@@ -71,7 +78,7 @@ const SingleListing = () => {
               <h3 className="text-xl">Contact Email:</h3>
 
               <p className="my-2 bg-indigo-100 p-2 font-bold">
-                {listing.aboutRoommate.contactEmail}
+                {listing.contactEmail}
               </p>
             </div>
 

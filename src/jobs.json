@@ -1,22 +1,5 @@
 {
-    "jobs": [
-      {
-        "id": "1",
-        "building": "STUVII 2",
-        "DormType": "Double",
-        "DormStyle": "Dorm",
-        "address": "208 baystate rd, 311",
-        "lookingFor": "Male",
-        "buildingNumber": "208",
-        "description": "blah blah blah",
-        "currentCost": "11,000",
-        "costDifference": "19,000+",
-        "aboutRoommate":{
-          "description": "hello"
-          
-        },
-        "contactEmail": "jaydenc@bu.edu"
-        
-      }
-    ]
+  "jobs": [
+    
+  ]
 }
