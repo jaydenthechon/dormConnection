@@ -1,22 +1,172 @@
 {
-    "jobs": [
-      {
-        "id": "1",
-        "building": "STUVII 2",
-        "DormType": "Double",
-        "DormStyle": "Dorm",
-        "address": "208 baystate rd, 311",
-        "lookingFor": "Male",
-        "buildingNumber": "208",
-        "description": "blah blah blah",
-        "currentCost": "11,000",
-        "costDifference": "19,000+",
-        "aboutRoommate":{
-          "description": "hello"
-          
-        },
-        "contactEmail": "jaydenc@bu.edu"
-        
+  "jobs": [
+    {
+      "id": "b8d2",
+      "building": "",
+      "TradeDescription": " in ",
+      "DormType": "",
+      "DormStyle": "",
+      "address": "264",
+      "lookingFor": "",
+      "roomNumber": "146",
+      "description": "246",
+      "currentCost": "",
+      "costDifference": "",
+      "contactEmail": "246",
+      "aboutRoommate": {
+        "description": ""
+      },
+      "dormFeatures": {
+        "featuresAsString": "• Laundry in Building\n• Bike Storage",
+        "hasLaundryInBuilding": true,
+        "hasStudyLounge": false,
+        "hasKitchen": false,
+        "hasBikeStorage": true,
+        "hasWaterFountain": false,
+        "hasDiningHall": false,
+        "hasElevator": false,
+        "hasPrivateBath": false
       }
-    ]
+    },
+    {
+      "id": "7f55",
+      "building": "",
+      "TradeDescription": " in ",
+      "DormType": "",
+      "DormStyle": "",
+      "address": "42",
+      "lookingFor": "",
+      "roomNumber": "12",
+      "description": "42",
+      "currentCost": "",
+      "costDifference": "",
+      "contactEmail": "326",
+      "aboutRoommate": {
+        "description": ""
+      },
+      "dormFeatures": {
+        "featuresAsString": "• Laundry in Building\n• Study Lounge\n• Elevator",
+        "hasLaundryInBuilding": true,
+        "hasStudyLounge": true,
+        "hasKitchen": false,
+        "hasBikeStorage": false,
+        "hasWaterFountain": false,
+        "hasDiningHall": false,
+        "hasElevator": true,
+        "hasPrivateBath": false
+      }
+    },
+    {
+      "id": "472a",
+      "building": "",
+      "TradeDescription": "Quad in ",
+      "DormType": "Quad",
+      "DormStyle": "",
+      "address": "264",
+      "lookingFor": "",
+      "roomNumber": "24",
+      "description": "264",
+      "currentCost": "",
+      "costDifference": "",
+      "contactEmail": "264",
+      "aboutRoommate": {
+        "description": ""
+      },
+      "dormFeatures": {
+        "featuresAsString": "• Study Lounge\n• Bike Storage",
+        "hasLaundryInBuilding": false,
+        "hasStudyLounge": true,
+        "hasKitchen": false,
+        "hasBikeStorage": true,
+        "hasWaterFountain": false,
+        "hasDiningHall": false,
+        "hasElevator": false,
+        "hasPrivateBath": false
+      }
+    },
+    {
+      "id": "a6d5",
+      "building": "1019",
+      "TradeDescription": "Quad in Suite",
+      "DormType": "Quad",
+      "DormStyle": "Suite",
+      "address": "4",
+      "lookingFor": "Male",
+      "roomNumber": "4",
+      "description": "4",
+      "currentCost": "",
+      "costDifference": "",
+      "contactEmail": "4",
+      "aboutRoommate": {
+        "description": ""
+      },
+      "dormFeatures": {
+        "featuresAsString": "• Study Lounge\n• Bike Storage",
+        "hasLaundryInBuilding": false,
+        "hasStudyLounge": true,
+        "hasKitchen": false,
+        "hasBikeStorage": true,
+        "hasWaterFountain": false,
+        "hasDiningHall": false,
+        "hasElevator": false,
+        "hasPrivateBath": false
+      }
+    },
+    {
+      "id": "b611",
+      "building": "",
+      "TradeDescription": " in ",
+      "DormType": "",
+      "DormStyle": "",
+      "address": "3",
+      "lookingFor": "",
+      "roomNumber": "5",
+      "description": "3",
+      "currentCost": "",
+      "costDifference": "",
+      "contactEmail": "3",
+      "aboutRoommate": {
+        "description": ""
+      },
+      "dormFeatures": {
+        "featuresAsString": "• Bike Storage\n• Water Fountain",
+        "hasLaundryInBuilding": false,
+        "hasStudyLounge": false,
+        "hasKitchen": false,
+        "hasBikeStorage": true,
+        "hasWaterFountain": true,
+        "hasDiningHall": false,
+        "hasElevator": false,
+        "hasPrivateBath": false
+      }
+    },
+    {
+      "id": "e273",
+      "building": "",
+      "TradeDescription": " in ",
+      "DormType": "",
+      "DormStyle": "",
+      "address": "4",
+      "lookingFor": "",
+      "roomNumber": "4",
+      "description": "4",
+      "currentCost": "",
+      "costDifference": "",
+      "contactEmail": "4",
+      "aboutRoommate": {
+        "description": ""
+      },
+      "dormFeatures": {
+        "featuresAsString": "• Water Fountain\n• Elevator",
+        "hasLaundryInBuilding": false,
+        "hasStudyLounge": false,
+        "hasKitchen": false,
+        "hasBikeStorage": false,
+        "hasWaterFountain": true,
+        "hasDiningHall": false,
+        "hasElevator": true,
+        "hasPrivateBath": false
+      }
+    }
+  ]
 }
