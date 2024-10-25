@@ -51,16 +51,6 @@ const SingleDorm = () => {
                 <h3 className="text-xl">Contact Email:</h3>
                 <p className="my-2 bg-indigo-100 p-2 font-bold">{Dorms.contactEmail}</p>
               </div>
-
-              <div className="bg-white p-6 rounded-lg shadow-md mt-6">
-                <h3 className="text-xl font-bold mb-6">Manage Dorm</h3>
-                <Link to={`/dorms/edit/${Dorms.id}`} className="bg-indigo-500 hover:bg-indigo-600 text-white text-center font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block">
-                  Edit Dorm
-                </Link>
-                <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block">
-                  Delete Dorm
-                </button>
-              </div>
             </aside>
           </div>
         </div>
