@@ -11,11 +11,11 @@ const Navbar = () => {
 
   return (
     <nav className="bg-indigo-700 border-b border-indigo-500 fixed top-0 left-0 w-full z-50">
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div className="flex h-20 items-center justify-between">
+      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-5">
+        <div className="flex h-20 items-center justify-end">
           {/* Logo */}
           <div className="flex items-center">
-            <NavLink className="flex items-center mr-4" to="/index.html">
+            <NavLink className="flex items-center mr-4" to="/">
               <img className="h-10 w-auto" src={logo} alt="Dorm Connection" />
               <span className="hidden md:block text-white text-2xl font-bold ml-2">
                 BU Swaps
@@ -66,9 +66,9 @@ const Navbar = () => {
           </div>
 
           {/* Desktop navigation */}
-          <div className="hidden md:flex md:ml-auto">
+          <div className="hidden md:flex justify-end md:ml-auto">
             <div className="flex space-x-2">
-              {['/', '/Listings', '/Add-listings', '/Dorms', '/Login'].map((path, index) => (
+              {['/', '/Listings', '/Add-listings', '/Explore-Dorms', '/Login'].map((path, index) => (
                 <NavLink
                   key={index}
                   to={path}
@@ -91,7 +91,7 @@ const Navbar = () => {
             }`}
           >
             <div className="flex flex-col space-y-2 p-4">
-              {['/', '/Listings', '/Add-listings', '/Dorms', '/Login'].map((path, index) => (
+              {['/', '/Listings', '/Add-listings', '/Explore-Dorms', '/Login'].map((path, index) => (
                 <NavLink
                   key={index}
                   to={path}

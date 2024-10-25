@@ -1,24 +1,376 @@
 {
+  "Dorms": [
+    {
+      "id": "Sleeper",
+      "building": "Sleeper Hall",
+      "address": "275 Babcock Street",
+      "description":"One of three towers located in West Campus, Sleeper Hall, is situated steps away from the state of the art FitRec, The Fresh Food Co. at West Campus dining hall, and Nickerson Field.",
+      "location":"West Campus",
+      "currentCost": "$12,180",
+      "diningPlanRequired": "Yes",
+      "tStop": "Babcock T Stop",
+      "diningHall": "West Dining Hall"
+      
+
+
+    },
+    {
+      "id": "Claflin",
+      "building": "Claflin Hall",
+      "address": "273 Babcock Street",
+      "description":"One of three towers located in West Campus, Claflin Hall, is situated steps away from the state of the art FitRec, The Fresh Food Co. at West Campus dining hall, and Nickerson Field.",
+      "location":"West Campus",
+      
+      "currentCost": "$12,180",
+      "diningPlanRequired": "Yes",
+      "tStop": "Babcock T Stop",
+      "diningHall": "West Dining Hall"
+      
+
+
+    },
+    {
+      "id": "Rich",
+      "building": "Rich Hall",
+      "address": "277 Babcock Street",
+      "description":"One of three towers located in West Campus, Rich Hall, is situated steps away from the state of the art FitRec, The Fresh Food Co. at West Campus dining hall, and Nickerson Field.",
+      "location":"West Campus",
+      
+      "currentCost": "12,180",
+      "diningPlanRequired": "Yes",
+      "tStop": "Babcock T Stop",
+      "diningHall": "West Dining Hall"
+      
+
+
+    },
+    {
+      "id": "1019",
+      "name": "1019",
+      "building": "1019 Commonwealth Ave",
+      "address": "1019 Commonwealth Ave",
+      "description":"Enjoy the benefits of West Campus in a cozy suite-style residence. 1019 Comm offers six person suites – perfect for large friend groups – with your own common room and bathroom. 1019 Comm is a short walk to Agganis Arena, FitRec, grocery stores, The Fresh Food Co. at West Campus dining hall, and multiple dining options located in Packard’s Corner.",
+      "location":"West Campus",
+      
+      "currentCost": "13,930",
+      "diningPlanRequired": "Yes",
+      "tStop": "Babcock T Stop",
+      "diningHall": "West Dining Hall"
+      
+
+
+    },
+    {
+      "id": "stuvi1",
+      "building": "STUVI I",
+      "address": "10 Buick St",
+      "description":"One half of the John Hancock Student Village, 10 Buick Street offers juniors and seniors contemporary accommodations such as they might experience as professionals. “StuVi-1” as it’s known on campus, is close to classrooms, Agganis Arena, FitRec, public transit, BU’s arts-and-culture block, tons of dining options, and a large grocery store. StuVi-1 has 185 four-person apartments, each with four single bedrooms, two bathrooms, a kitchen, and a living/dining area. There are also 31 two-person apartments each with two single bedrooms, a bathroom, kitchen, and living/dining area. Entering freshmen and transfer students are not eligible to live in 10 Buick Street during their first year.",
+      "location":"West Campus",
+      
+      "currentCost": "$21,020 - 21,690",
+      "diningPlanRequired": "Optional",
+      "tStop": "Babcock T Stop",
+      "diningHall": "West Dining Hall"
+      
+
+
+    },
+    {
+      "id": "stuvi2",
+      "building": "STUVI II",
+      "address": "33 Harry Agganis Way",
+      "description":"One of our newest residences, StuVi-2 accommodates 960 residents in two, unique high-rises. The 26-story north tower hosts juniors and seniors in an apartment-style setting, and the 19-story south tower houses sophomores, juniors, and seniors in a suite-style setting. Entering freshmen and transfer students are not eligible to live at 33 Harry Agganis Way during their first year.",
+      "location":"West Campus",
+      
+      "currentCost": "$15,990 - 21,690",
+      "diningPlanRequired": "Yes if Suite, otherwise Optional",
+      "tStop": "Babcock T Stop",
+      "diningHall": "West Dining Hall"
+      
+
+
+    },
+    {
+      "id": "hojo",
+      "building": "575 Commonwealth Ave (Hojo)",
+      "address": "575 Commonwealth Ave",
+      "description":"Located in the heart of East Campus right along Commonwealth Avenue, 575 Comm offers students a short walk to classrooms in Questrom, COM, and CAS; The Fresh Food Co. at Marciano Commons; and Kenmore Square. 575 Comm’s convenient location and in-room bathroom makes it a popular option amongst students!",
+      "location":"East Campus",
+      
+      "currentCost": "$12,180",
+      "diningPlanRequired": "Yes",
+      "tStop": "Blanford St T Stop",
+      "diningHall": "Marciano Commons"
+      
+
+
+    },
+    {
+      "id": "myles",
+      "building": "610 Beacon St",
+      "address": "610 Beacon Street",
+      "description":"610 Beacon Street is located at the heart of Kenmore Square. It is steps away from Fenway Park, restaurants, shops, and the famous Citgo sign. Just steps away you will also find on-campus dining at The Fresh Food Co. at Marciano Commons.",
+      "location":"East Campus",
+      
+      "currentCost": "$13,930 - 17,170",
+      "diningPlanRequired": "Yes",
+      "tStop": "Kenmore T Stop",
+      "diningHall": "Marciano Commons"
+
+    },
+    {
+      "id": "baystate",
+      "building": "Baystate Rd Brownstones",
+      "address": "214 - 90 Baystate Rd",
+      "description":"Live on one of BU’s most picturesque streets. These charming brownstones are close to classrooms, green space, and the bustle of Comm Ave while retaining a residential neighborhood feel and sense of community. The Bay State Road community buildings are coeducational, with two and three-person double or triple rooms and the occasional single or four-person room mixed in, and residents share a common bathroom on their floor.",
+      "location":"Central to East Campus",
+      
+      "currentCost": "$12,180 - 21,960",
+      "diningPlanRequired": "Optional if in Apartment, otherwise Yes",
+      "tStop": "East Campus, Blandford St, Kenmore",
+      "diningHall": "Warren Towers or Marciano Commons"
+      
+
+
+    },
+    {
+      "id": "whitestones",
+      "building": "Commonwealth Ave Brownstones",
+      "address": "728 - 627 Baystate Rd",
+      "description":"Enjoy the best of all worlds. Nearby you’ll find classroom buildings and libraries, Charles River biking and jogging paths, and Kenmore Square and Comm Ave shopping and dining. Choose from shared or single one-bedroom or studio units, equipped with kitchen and bathroom.",
+      "location":"Central Campus",
+      
+      "currentCost": "$16,240 - 21,960",
+      "diningPlanRequired": "No",
+      "tStop": "Central Campus T Stop",
+      "diningHall": "Warren Towers"
+      
+
+
+    },
+    {
+      "id": "danielson",
+      "building": "Danielson Hall",
+      "address": "512 Beacon St",
+      "description":"Located in the Back Bay area of Boston nestled between beautiful brownstones, Danielsen Hall offers stunning views of the city and the Charles River. It is also steps away from Newbury Street, which offers various dining and shopping options. Just outside is also a BU Shuttle stop to whisk you away to the center of campus. Danielsen Hall also offers spacious bedrooms and a common area kitchen and lounge.",
+      "location":"East Campus (near Newbury St)",
+      
+      "currentCost": "",
+      "diningPlanRequired": "Yes",
+      "tStop": "Hynes Convention Center",
+      "diningHall": "Marciano Commons"
+      
+
+
+    },
+    {
+      "id": "fenway1",
+      "building": "Riverway House",
+      "address": "162 Riverway",
+      "description":"For a taste of in-town living, consider Fenway, BU’s newest campus. As the name implies, you’ll be right in the heart of Boston’s Fenway neighborhood and close to South Campus. Dining and activities abound, as well as the Wheelock Family Theatre, Target, groceries, and supplies. You can reach BU’s central campus including the School of Arts and Sciences, Questrom School of Business, via a pleasant 15-minute walk or a short ride on the BU shuttle.",
+      "location":"Fenway Campus",
+      
+      "currentCost": "",
+      "diningPlanRequired": "Yes",
+      "tStop": "Fenway BU Shuttle",
+      "diningHall": "Fenway Dining Hall"
+      
+
+
+    },
+    {
+      "id": "fenway2",
+      "building": "Pilgrim House",
+      "address": "37 Pilgrim Rd",
+      "description":"For a taste of in-town living, consider Fenway, BU’s newest campus. As the name implies, you’ll be right in the heart of Boston’s Fenway neighborhood and close to South Campus. Dining and activities abound, as well as the Wheelock Family Theatre, Target, groceries, and supplies. You can reach BU’s central campus including the School of Arts and Sciences, Questrom School of Business, via a pleasant 15-minute walk or a short ride on the BU shuttle.",
+      "location":"Fenway Campus",
+      
+      "currentCost": "",
+      "diningPlanRequired": "Yes",
+      "tStop": "Fenway BU Shuttle",
+      "diningHall": "Fenway Dining Hall"
+      
+
+
+    },
+    {
+      "id": "fenway3",
+      "building": "Longwood House",
+      "address": "154 Riverway",
+      "description":"For a taste of in-town living, consider Fenway, BU’s newest campus. As the name implies, you’ll be right in the heart of Boston’s Fenway neighborhood and close to South Campus. Dining and activities abound, as well as the Wheelock Family Theatre, Target, groceries, and supplies. You can reach BU’s central campus including the School of Arts and Sciences, Questrom School of Business, via a pleasant 15-minute walk or a short ride on the BU shuttle.",
+      "location":"Fenway Campus",
+      
+      "currentCost": "",
+      "diningPlanRequired": "Yes",
+      "tStop": "Fenway BU Shuttle",
+      "diningHall": "Fenway Dining Hall"
+      
+
+
+    },
+    {
+      "id": "fenway4",
+      "building": "Campus Center & Student Residence",
+      "address": "150 Riverway",
+      "description":"For a taste of in-town living, consider Fenway, BU’s newest campus. As the name implies, you’ll be right in the heart of Boston’s Fenway neighborhood and close to South Campus. Dining and activities abound, as well as the Wheelock Family Theatre, Target, groceries, and supplies. You can reach BU’s central campus including the School of Arts and Sciences, Questrom School of Business, via a pleasant 15-minute walk or a short ride on the BU shuttle.",
+      "location":"Fenway Campus",
+      
+      "currentCost": "",
+      "diningPlanRequired": "Yes",
+      "tStop": "Fenway BU Shuttle",
+      "diningHall": "Fenway Dining Hall"
+      
+
+
+    },
+    {
+      "id": "khc",
+      "building": "Kilachand Hall",
+      "address": "91 Baystate Rd",
+      "description":"",
+      "location":"East",
+      
+      "currentCost": "Located just steps away from the bustling Kenmore Square and Fenway Park, Kilachand Hall offers four and five person suites with private bathrooms. The ninth floor study lounge offers stunning views of the Charles River and Fenway Park. Just across the street is also the award winning The Fresh Food Co. at Marciano Commons.",
+      "diningPlanRequired": "Yes",
+      "tStop": "Kenmore T Stop",
+      "diningHall": "Marciano Commons"
+      
+
+
+    },
+    {
+      "id": "south",
+      "building": "South Campus",
+      "address": "Park St, Mountfort St, Buswell St, Arundel St, Beacon St",
+      "description":"With the greatest number of apartment-style residences on campus, your perfect fit awaits in the wide array on South Campus. And you'll have plenty of new neighbors, so theres always someone up for exploring the city or staying local, whatever your pleasure. Residences include studio apartments for one and two, one-bedroom apartments for two, and apartments with multiple bedrooms with single and shared bedrooms. Apartments come equipped with a kitchen and bathroom. Many residences have study lounges and laundry facilities on site (some even accept Convenience Points!).",
+      "location":"South Campus",
+      
+      "currentCost": "",
+      "diningPlanRequired": "Optional if in Apartment, otherwise Yes",
+      "tStop": "Central Campus T Stop",
+      "diningHall": "Warren Towers"
+      
+
+
+    },
+    {
+      "id": "towers",
+      "building": "Towers",
+      "address": "140 Baystate Rd",
+      "description":"The Towers is located on Bay State Road, one BU’s most picturesque streets. It has on site laundry, residence life office, and mailroom. Convenient and nearby on-campus dining options include The Fresh Food Co. at Warren Towers and The Fresh Food Co. at Marciano Commons. Not to mention recently renovated study spaces and lounges.",
+      "location":"East Campus",
+      
+      "currentCost": "",
+      "diningPlanRequired": "Yes",
+      "tStop": "Blanford St T Stop",
+      "diningHall": "Marciano Commons"
+
+
+    },
+    {
+      "id": "warren",
+      "building": "Warren Towers",
+      "address": "700 Commonwealth Ave",
+      "description":"Warren Towers is BU’s biggest traditional style residence. It consists of three towers and is a great place to get to know people. With its central location, in residence dining hall The Fresh Food Co. at Warren Towers, laundry rooms, mail services, and study rooms, it makes it one of our most popular living options for students who want it all.",
+      "location":"Central Campus",
+      
+      "currentCost": "",
+      "diningPlanRequired": "Yes",
+      "tStop": "East Campus T Stop",
+      "diningHall": "Warren Towers"
+      
+
+
+    }
+  ],
   "jobs": [
     {
-      "id": "7a25",
-      "building": "1019",
-      "TradeDescription": "Quad in Suite",
-      "DormType": "Quad",
-      "DormStyle": "Suite",
-      "address": "13",
-      "lookingFor": "Female",
-      "roomNumber": "13",
-      "description": "13",
+      "id": "0171",
+      "building": "West Campus (Sleeper Hall)",
+      "TradeDescription": "Single in a Studio Apartment",
+      "DormType": "Single",
+      "DormStyle": "Studio Apartment",
+      "address": "277 Babcock St",
+      "lookingFor": "Male",
+      "floorNumber": "12",
+      "description": "-has built in dining hall\n-bike storage room\n-laundry room\n-good to meet freshmen\n-communal bathrooms suck\n-blah blah balh",
+      
       "currentCost": "",
+      "diningPlanRequired": ""
+      
+      ,
       "costDifference": "",
-      "contactEmail": "135",
+      "contactEmail": "test@bu.edu",
       "aboutRoommate": {
         "description": ""
       },
       "dormFeatures": {
-        "featuresAsString": "",
+        "featuresAsString": "• Bike Storage\n• Elevator",
         "hasLaundryInBuilding": false,
+        "hasStudyLounge": false,
+        "hasKitchen": false,
+        "hasBikeStorage": true,
+        "hasWaterFountain": false,
+        "hasDiningHall": false,
+        "hasElevator": true,
+        "hasPrivateBath": false
+      }
+    },
+    {
+      "id": "ffb2",
+      "building": "1019",
+      "TradeDescription": "Single in a 2 Person Apartment",
+      "DormType": "Single",
+      "DormStyle": "2 Person Apartment",
+      "address": "42 Buswell",
+      "lookingFor": "Female",
+      "floorNumber": "10",
+      "description": "-faces teh charles\n-good views\n-meow meow meow\n-CDS\n-dining hall",
+      
+      "currentCost": "",
+      "diningPlanRequired": ""
+      
+      ,
+      "costDifference": "",
+      "contactEmail": "test2@bu.edu",
+      "aboutRoommate": {
+        "description": ""
+      },
+      "dormFeatures": {
+        "featuresAsString": "• Kitchen\n• Bike Storage",
+        "hasLaundryInBuilding": false,
+        "hasStudyLounge": false,
+        "hasKitchen": true,
+        "hasBikeStorage": true,
+        "hasWaterFountain": false,
+        "hasDiningHall": false,
+        "hasElevator": false,
+        "hasPrivateBath": false
+      }
+    },
+    {
+      "id": "1536",
+      "building": "575 Commonwealth Ave (Hojo)",
+      "TradeDescription": "Single in a Studio Apartment",
+      "DormType": "Single",
+      "DormStyle": "Studio Apartment",
+      "address": "277 Babcock street",
+      "lookingFor": "Gender Neutral",
+      "floorNumber": "3",
+      "description": "njjhgfyioo",
+      
+      "currentCost": "",
+      "diningPlanRequired": ""
+      
+      ,
+      "costDifference": "",
+      "contactEmail": "oliviama@bu.edu",
+      "aboutRoommate": {
+        "description": ""
+      },
+      "dormFeatures": {
+        "featuresAsString": "• Laundry in Building",
+        "hasLaundryInBuilding": true,
         "hasStudyLounge": false,
         "hasKitchen": false,
         "hasBikeStorage": false,
@@ -29,56 +381,64 @@
       }
     },
     {
-      "id": "6b23",
+      "id": "51dd",
       "building": "10 Buick St (Stuvi 1)",
-      "TradeDescription": "Single in Suite",
-      "DormType": "Single",
+      "TradeDescription": "Double in a Suite",
+      "DormType": "Double",
       "DormStyle": "Suite",
-      "address": "31",
-      "lookingFor": "Male",
-      "roomNumber": "3",
-      "description": "13",
+      "address": "35 Babcock St",
+      "lookingFor": "Non-Binary/Other",
+      "floorNumber": "27",
+      "description": "asdfasdf",
+      
       "currentCost": "",
+      "diningPlanRequired": ""
+      
+      ,
       "costDifference": "",
-      "contactEmail": "j@bu.edu",
+      "contactEmail": "test3@bu.edu",
       "aboutRoommate": {
         "description": ""
       },
       "dormFeatures": {
-        "featuresAsString": "• Water Fountain\n• Elevator",
+        "featuresAsString": "• Study Lounge\n• Elevator",
         "hasLaundryInBuilding": false,
-        "hasStudyLounge": false,
+        "hasStudyLounge": true,
         "hasKitchen": false,
         "hasBikeStorage": false,
-        "hasWaterFountain": true,
+        "hasWaterFountain": false,
         "hasDiningHall": false,
         "hasElevator": true,
         "hasPrivateBath": false
       }
     },
     {
-      "id": "e0e7",
-      "building": "1019",
-      "TradeDescription": "Double in 2 Person Apartment",
+      "id": "4970",
+      "building": "610 Beacon St",
+      "TradeDescription": "Double in a 2 Person Apartment",
       "DormType": "Double",
       "DormStyle": "2 Person Apartment",
-      "address": "33 Harry Agganis ",
-      "lookingFor": "Female",
-      "roomNumber": "23",
-      "description": "13",
+      "address": "610 Beacon Street",
+      "lookingFor": "Non-Binary/Other",
+      "floorNumber": "4",
+      "description": "must have huge bagoingas",
+      
       "currentCost": "",
+      "diningPlanRequired": ""
+      
+      ,
       "costDifference": "",
-      "contactEmail": "@bu.edu",
+      "contactEmail": "ihu21@bu.edu",
       "aboutRoommate": {
         "description": ""
       },
       "dormFeatures": {
-        "featuresAsString": "• Kitchen\n• Water Fountain",
+        "featuresAsString": "",
         "hasLaundryInBuilding": false,
         "hasStudyLounge": false,
-        "hasKitchen": true,
+        "hasKitchen": false,
         "hasBikeStorage": false,
-        "hasWaterFountain": true,
+        "hasWaterFountain": false,
         "hasDiningHall": false,
         "hasElevator": false,
         "hasPrivateBath": false
