@@ -68,7 +68,7 @@ const Navbar = () => {
           {/* Desktop navigation */}
           <div className="hidden md:flex justify-end md:ml-auto">
             <div className="flex space-x-2">
-              {['/', '/Listings', '/Add-listings', '/Explore Dorms', '/Login'].map((path, index) => (
+              {['/', '/Listings', '/Add-listings', '/Explore-Dorms', '/Login'].map((path, index) => (
                 <NavLink
                   key={index}
                   to={path}
@@ -91,7 +91,7 @@ const Navbar = () => {
             }`}
           >
             <div className="flex flex-col space-y-2 p-4">
-              {['/', '/Listings', '/Add-listings', '/Dorms', '/Login'].map((path, index) => (
+              {['/', '/Listings', '/Add-listings', '/Explore-Dorms', '/Login'].map((path, index) => (
                 <NavLink
                   key={index}
                   to={path}

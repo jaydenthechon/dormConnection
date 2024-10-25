@@ -1,5 +1,147 @@
 {
+  "Dorms": [
+    {}
+  ],
   "jobs": [
-      
+    {
+      "id": "0171",
+      "building": "West Campus (Sleeper Hall)",
+      "TradeDescription": "Single in a Studio Apartment",
+      "DormType": "Single",
+      "DormStyle": "Studio Apartment",
+      "address": "277 Babcock St",
+      "lookingFor": "Male",
+      "floorNumber": "12",
+      "description": "-has built in dining hall\n-bike storage room\n-laundry room\n-good to meet freshmen\n-communal bathrooms suck\n-blah blah balh",
+      "currentCost": "",
+      "costDifference": "",
+      "contactEmail": "test@bu.edu",
+      "aboutRoommate": {
+        "description": ""
+      },
+      "dormFeatures": {
+        "featuresAsString": "• Bike Storage\n• Elevator",
+        "hasLaundryInBuilding": false,
+        "hasStudyLounge": false,
+        "hasKitchen": false,
+        "hasBikeStorage": true,
+        "hasWaterFountain": false,
+        "hasDiningHall": false,
+        "hasElevator": true,
+        "hasPrivateBath": false
+      }
+    },
+    {
+      "id": "ffb2",
+      "building": "1019",
+      "TradeDescription": "Single in a 2 Person Apartment",
+      "DormType": "Single",
+      "DormStyle": "2 Person Apartment",
+      "address": "42 Buswell",
+      "lookingFor": "Female",
+      "floorNumber": "10",
+      "description": "-faces teh charles\n-good views\n-meow meow meow\n-CDS\n-dining hall",
+      "currentCost": "",
+      "costDifference": "",
+      "contactEmail": "test2@bu.edu",
+      "aboutRoommate": {
+        "description": ""
+      },
+      "dormFeatures": {
+        "featuresAsString": "• Kitchen\n• Bike Storage",
+        "hasLaundryInBuilding": false,
+        "hasStudyLounge": false,
+        "hasKitchen": true,
+        "hasBikeStorage": true,
+        "hasWaterFountain": false,
+        "hasDiningHall": false,
+        "hasElevator": false,
+        "hasPrivateBath": false
+      }
+    },
+    {
+      "id": "1536",
+      "building": "575 Commonwealth Ave (Hojo)",
+      "TradeDescription": "Single in a Studio Apartment",
+      "DormType": "Single",
+      "DormStyle": "Studio Apartment",
+      "address": "277 Babcock street",
+      "lookingFor": "Gender Neutral",
+      "floorNumber": "3",
+      "description": "njjhgfyioo",
+      "currentCost": "",
+      "costDifference": "",
+      "contactEmail": "oliviama@bu.edu",
+      "aboutRoommate": {
+        "description": ""
+      },
+      "dormFeatures": {
+        "featuresAsString": "• Laundry in Building",
+        "hasLaundryInBuilding": true,
+        "hasStudyLounge": false,
+        "hasKitchen": false,
+        "hasBikeStorage": false,
+        "hasWaterFountain": false,
+        "hasDiningHall": false,
+        "hasElevator": false,
+        "hasPrivateBath": false
+      }
+    },
+    {
+      "id": "51dd",
+      "building": "10 Buick St (Stuvi 1)",
+      "TradeDescription": "Double in a Suite",
+      "DormType": "Double",
+      "DormStyle": "Suite",
+      "address": "35 Babcock St",
+      "lookingFor": "Non-Binary/Other",
+      "floorNumber": "27",
+      "description": "asdfasdf",
+      "currentCost": "",
+      "costDifference": "",
+      "contactEmail": "test3@bu.edu",
+      "aboutRoommate": {
+        "description": ""
+      },
+      "dormFeatures": {
+        "featuresAsString": "• Study Lounge\n• Elevator",
+        "hasLaundryInBuilding": false,
+        "hasStudyLounge": true,
+        "hasKitchen": false,
+        "hasBikeStorage": false,
+        "hasWaterFountain": false,
+        "hasDiningHall": false,
+        "hasElevator": true,
+        "hasPrivateBath": false
+      }
+    },
+    {
+      "id": "4970",
+      "building": "610 Beacon St",
+      "TradeDescription": "Double in a 2 Person Apartment",
+      "DormType": "Double",
+      "DormStyle": "2 Person Apartment",
+      "address": "610 Beacon Street",
+      "lookingFor": "Non-Binary/Other",
+      "floorNumber": "4",
+      "description": "must have huge bagoingas",
+      "currentCost": "",
+      "costDifference": "",
+      "contactEmail": "ihu21@bu.edu",
+      "aboutRoommate": {
+        "description": ""
+      },
+      "dormFeatures": {
+        "featuresAsString": "",
+        "hasLaundryInBuilding": false,
+        "hasStudyLounge": false,
+        "hasKitchen": false,
+        "hasBikeStorage": false,
+        "hasWaterFountain": false,
+        "hasDiningHall": false,
+        "hasElevator": false,
+        "hasPrivateBath": false
+      }
+    }
   ]
 }

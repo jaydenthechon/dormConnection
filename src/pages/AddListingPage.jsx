@@ -251,6 +251,7 @@ const AddListingPage = ({ addListingSubmit }) => {
                   value={building}
                   onChange={(e) => setBuilding(e.target.value)}
                 >
+                  <option value="selectOne">Select One</option>
                   <option value="1019">1019</option>
                   <option value="10 Buick St (Stuvi 1)">10 Buick St (Stuvi 1)</option>
                   <option value="33 Harry Agganis Way">33 Harry Agganis Way (Stuvi 2)</option>
