@@ -63,7 +63,7 @@ const SingleListing = () => {
               <h3 className="text-xl font-bold mb-6">New Roommate Info</h3>
 
               <p className="my-2">
-                {listing.about.description}
+                {listing.aboutRoommate.description}
               </p>
 
               <hr className="my-4" />
@@ -71,12 +71,8 @@ const SingleListing = () => {
               <h3 className="text-xl">Contact Email:</h3>
 
               <p className="my-2 bg-indigo-100 p-2 font-bold">
-                {listing.about.contactEmail}
+                {listing.aboutRoommate.contactEmail}
               </p>
-
-              <h3 className="text-xl">Contact Phone:</h3>
-
-              <p className="my-2 bg-indigo-100 p-2 font-bold">{listing.about.contactPhone}</p>
             </div>
 
           

@@ -8,20 +8,23 @@ import SingleListing, {listingLoader} from './pages/singleListing'
 import AddListingPage from './pages/AddListingPage'
 
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-  <Route path='/' element={<MainLayout />}>
-    <Route index element={<HomePage />} />
-    <Route path='/listings' element={<ListingPage/>} />
-    <Route path='/add-listings' element={<AddListingPage/>} />
-    <Route path='/listings/:id' element={<SingleListing/>} loader={listingLoader}/>
-    <Route path='*' element={<NotFound />} />
-  </Route>
-  )
-)
 
 
 const App = () => {
+  const addListing = (newListing) =>{
+    console.log(newListing)
+  }
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+    <Route path='/' element={<MainLayout />}>
+      <Route index element={<HomePage />} />
+      <Route path='/listings' element={<ListingPage/>} />
+      <Route path='/add-listings' element={<AddListingPage addListingSubmit={addListing}/>} />
+      <Route path='/listings/:id' element={<SingleListing/>} loader={listingLoader}/>
+      <Route path='*' element={<NotFound />} />
+    </Route>
+    )
+  )
   return <RouterProvider router={router} />
 }
 

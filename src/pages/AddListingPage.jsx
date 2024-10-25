@@ -1,174 +1,194 @@
-import React from 'react'
-import{useState} from 'react'
+import React, { useState } from 'react'
+import DOMPurify from 'dompurify'
+import { useNavigate } from 'react-router-dom'
 
-const AddListingPage = () => {
-    const[] = useState('')
+const AddListingPage = ({ addListingSubmit }) => {
+  const [building, setBuilding] = useState('')
+  const [DormType, setDormType] = useState('')
+  const [DormStyle, setDormStyle] = useState('')
+  const [lookingFor, setLookingFor] = useState('')
+  const [buildingNumber, setBuildingNumber] = useState('')
+  const [description, setDescription] = useState('')
+  
+  const [error, setError] = useState(''); // Error state to track validation errors
+
+  const handleBuildingNumberChange = (e) => {
+    const sanitizedValue = e.target.value.replace(/[^0-9]/g, ''); // Sanitize input
+    setBuildingNumber(sanitizedValue); // Update state
+    setError(''); // Reset the error when the input changes
+  };
+
+  const handleBlur = () => {
+    if (!buildingNumber) {
+      setError('Building number is required');
+    } else if (buildingNumber < 1 || buildingNumber > 1000) {
+      setError('Building number must be between 1 and 1000');
+    }
+  };
+
+  const navigate = useNavigate()
+
+  const submitForm = (e) => {
+    e.preventDefault()
+
+    const newListing = {
+      building,
+      DormType,
+      DormStyle,
+      lookingFor,
+      buildingNumber,
+      description,
+      aboutRoommate: {
+        description
+      }
+    }
+
+    addListingSubmit(newListing)
+    navigate('/listings')
+  }
 
   return (
     <>
-    <section className="bg-indigo-50">
-      <div className="container m-auto max-w-2xl py-24">
-        <div
-          className="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0"
-        >
-          <form>
-            <h2 className="text-3xl text-center font-semibold mb-6">Add Job</h2>
+      <section className="bg-indigo-50">
+        <div className="container m-auto max-w-2xl py-24">
+          <div className="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
+            <form onSubmit={submitForm}>
+              <h2 className="text-3xl text-center font-semibold mb-6">Listing Form</h2>
 
-            <div className="mb-4">
-              <label htmlFor="type" className="block text-gray-700 font-bold mb-2"
-                >Job Type</label
-              >
-              <select
-                id="type"
-                name="type"
-                className="border rounded w-full py-2 px-3"
-                required
-              >
-                <option value="Full-Time">Full-Time</option>
-                <option value="Part-Time">Part-Time</option>
-                <option value="Remote">Remote</option>
-                <option value="Internship">Internship</option>
-              </select>
-            </div>
+              {/* Dorm Type */}
+              <div className="mb-4">
+                <label htmlFor="dormType" className="block text-gray-700 font-bold mb-2">
+                  Dorm Type
+                </label>
+                <select
+                  id="dormType"
+                  name="dormType"
+                  className="border rounded w-full py-2 px-3"
+                  required
+                  value={DormType}
+                  onChange={(e) => setDormType(e.target.value)}
+                >
+                  <option value="Single">Single</option>
+                  <option value="Double">Double</option>
+                  <option value="Triple">Triple</option>
+                  <option value="Quad">Quad</option>
+                </select>
+              </div>
 
-            <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2"
-                >Job Listing Name</label
-              >
-              <input
-                type="text"
-                id="title"
-                name="title"
-                className="border rounded w-full py-2 px-3 mb-2"
-                placeholder="eg. Beautiful Apartment In Miami"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                htmlFor="description"
-                className="block text-gray-700 font-bold mb-2"
-                >Description</label
-              >
-              <textarea
-                id="description"
-                name="description"
-                className="border rounded w-full py-2 px-3"
-                rows="4"
-                placeholder="Add any job duties, expectations, requirements, etc"
-              ></textarea>
-            </div>
+              {/* Dorm Style */}
+              <div className="mb-4">
+                <label htmlFor="dormStyle" className="block text-gray-700 font-bold mb-2">
+                  Dorm Style
+                </label>
+                <select
+                  id="dormStyle"
+                  name="dormStyle"
+                  className="border rounded w-full py-2 px-3"
+                  required
+                  value={DormStyle}
+                  onChange={(e) => setDormStyle(e.target.value)}
+                >
+                  <option value="Dorm">Dorm</option>
+                  <option value="Suite">Suite</option>
+                  <option value="Apartment">Apartment</option>
+                  <option value="STUVI I/II">STUVI I/II</option>
+                </select>
+              </div>
 
-            <div className="mb-4">
-              <label htmlFor="type" className="block text-gray-700 font-bold mb-2"
-                >Salary</label
-              >
-              <select
-                id="salary"
-                name="salary"
-                className="border rounded w-full py-2 px-3"
-                required
-              >
-                <option value="Under $50K">Under $50K</option>
-                <option value="$50K - 60K">$50K - $60K</option>
-                <option value="$60K - 70K">$60K - $70K</option>
-                <option value="$70K - 80K">$70K - $80K</option>
-                <option value="$80K - 90K">$80K - $90K</option>
-                <option value="$90K - 100K">$90K - $100K</option>
-                <option value="$100K - 125K">$100K - $125K</option>
-                <option value="$125K - 150K">$125K - $150K</option>
-                <option value="$150K - 175K">$150K - $175K</option>
-                <option value="$175K - 200K">$175K - $200K</option>
-                <option value="Over $200K">Over $200K</option>
-              </select>
-            </div>
+              {/* Looking For */}
+              <div className="mb-4">
+                <label htmlFor="lookingFor" className="block text-gray-700 font-bold mb-2">
+                  Looking For...
+                </label>
+                <select
+                  id="lookingFor"
+                  name="lookingFor"
+                  className="border rounded w-full py-2 px-3"
+                  required
+                  value={lookingFor}
+                  onChange={(e) => setLookingFor(e.target.value)}
+                >
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Non-Binary/Other">Non-Binary/Other</option>
+                  <option value="Gender Neutral">Doesn't Matter (gender neutral)</option>
+                </select>
+              </div>
 
-            <div className='mb-4'>
-              <label className='block text-gray-700 font-bold mb-2'>
-                Location
-              </label>
-              <input
-                type='text'
-                id='location'
-                name='location'
-                className='border rounded w-full py-2 px-3 mb-2'
-                placeholder='Company Location'
-                required           
-              />
-            </div>
+              {/* Current Location */}
+              <div className="mb-4">
+                <label htmlFor="building" className="block text-gray-700 font-bold mb-2">
+                  Current Location
+                </label>
+                <select
+                  id="building"
+                  name="building"
+                  className="border rounded w-full py-2 px-3"
+                  required
+                  value={building}
+                  onChange={(e) => setBuilding(e.target.value)}
+                >
+                  <option value="1019">1019</option>
+                  <option value="10 Buick St (Stuvi 1)">10 Buick St (Stuvi 1)</option>
+                  <option value="33 Harry Agganis Way">33 Harry Agganis Way (Stuvi 2)</option>
+                  <option value="Baystate Brownstones">Baystate Brownstones</option>
+                  <option value="Commonwealth Ave Brownstones">Commonwealth Ave Brownstones</option>
+                  <option value="South Campus">South Campus</option>
+                  <option value="Whitestones">Whitestones</option>
+                  {/* More options... */}
+                </select>
+              </div>
 
-            <h3 className="text-2xl mb-5">Company Info</h3>
+              {/* Building Number */}
+              <div className="mb-4">
+                <label htmlFor="buildingNumber" className="block text-gray-700 font-bold mb-2">
+                  Please List the Building Number
+                </label>
+                <input
+                  type="number"
+                  id="buildingNumber"
+                  name="buildingNumber"
+                  className="border rounded w-full py-2 px-3 mb-2"
+                  placeholder="eg. 208"
+                  value={buildingNumber}
+                  onChange={handleBuildingNumberChange}
+                  onBlur={handleBlur}
+                  min="1"
+                  max="1000"
+                  required={['Baystate', 'Whitestones', 'Commonwealth Ave Brownstones', 'South'].includes(building)}
+                />
+                {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+              </div>
 
-            <div className="mb-4">
-              <label htmlFor="company" className="block text-gray-700 font-bold mb-2"
-                >Company Name</label
-              >
-              <input
-                type="text"
-                id="company"
-                name="company"
-                className="border rounded w-full py-2 px-3"
-                placeholder="Company Name"
-              />
-            </div>
+              {/* Description */}
+              <div className="mb-4">
+                <label htmlFor="description" className="block text-gray-700 font-bold mb-2">
+                  Description
+                </label>
+                <textarea
+                  id="description"
+                  name="description"
+                  className="border rounded w-full py-2 px-3"
+                  rows="5"
+                  placeholder="Info such as: Faces the Charles, good sunlight, close to CAS, etc"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                ></textarea>
+              </div>
 
-            <div className="mb-4">
-              <label
-                htmlFor="company_description"
-                className="block text-gray-700 font-bold mb-2"
-                >Company Description</label
-              >
-              <textarea
-                id="company_description"
-                name="company_description"
-                className="border rounded w-full py-2 px-3"
-                rows="4"
-                placeholder="What does your company do?"
-              ></textarea>
-            </div>
-
-            <div className="mb-4">
-              <label
-                htmlFor="contact_email"
-                className="block text-gray-700 font-bold mb-2"
-                >Contact Email</label
-              >
-              <input
-                type="email"
-                id="contact_email"
-                name="contact_email"
-                className="border rounded w-full py-2 px-3"
-                placeholder="Email address for applicants"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                htmlFor="contact_phone"
-                className="block text-gray-700 font-bold mb-2"
-                >Contact Phone</label
-              >
-              <input
-                type="tel"
-                id="contact_phone"
-                name="contact_phone"
-                className="border rounded w-full py-2 px-3"
-                placeholder="Optional phone for applicants"
-              />
-            </div>
-
-            <div>
-              <button
-                className="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
-                type="submit"
-              >
-                Add Job
-              </button>
-            </div>
-          </form>
+              {/* Submit Button */}
+              <div>
+                <button
+                  className="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+                  type="submit"
+                >
+                  Add Listing
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
     </>
   )
 }
