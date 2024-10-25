@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+
 const AddListingPage = ({ addListingSubmit }) => {
   // Basic fields
   const [building, setBuilding] = useState('')
@@ -70,39 +71,64 @@ const AddListingPage = ({ addListingSubmit }) => {
     hasPrivateBath
   ])
 
-  const handleRoomNumberChange = (e) => {
-    const sanitizedValue = e.target.value.replace(/[^0-9]/g, ''); // Sanitize input
-    setRoomNumber(sanitizedValue); // Update state
-    setError(''); // Reset the error when the input changes
+  const [buildingError, setBuildingError] = useState('')
+const [dormTypeError, setDormTypeError] = useState('')
+const [dormStyleError, setDormStyleError] = useState('')
+const [lookingForError, setLookingForError] = useState('')
+const [roomNumberError, setRoomNumberError] = useState('')
+const [addressError, setAddressError] = useState('')
+const [contactEmailError, setContactEmailError] = useState('')
+
+const validateForm = () => {
+  let isValid = true
+
+  // Reset error messages
+  setBuildingError('')
+  setDormTypeError('')
+  setDormStyleError('')
+  setLookingForError('')
+  setRoomNumberError('')
+  setAddressError('')
+  setContactEmailError('')
+
+  const validAddressWords = ["Park", "Buswell", "Commonwealth", "Baystate", "Beacon", "Babcock", "MountFort", "Arundel", "Riverway", "Pilgrim", "10 Buick", "33 Harry Agganis"];
+
+  if (!building || building === 'selectOne') {
+    setBuildingError('Please select a building.')
+    isValid = false
+  }
+  if (!DormType || DormType === 'selectOne') {
+    setDormTypeError('Please select a dorm type.')
+    isValid = false
+  }
+  if (!DormStyle || DormStyle === 'selectOne') {
+    setDormStyleError('Please select a dorm style.')
+    isValid = false
+  }
+  if (!lookingFor || lookingFor === 'selectOne') {
+    setLookingForError('Please select an option for "Looking For...".')
+    isValid = false
+  }
+  if (!roomNumber || roomNumber < 1 || roomNumber > 27) {
+    setRoomNumberError('Floor number must be between 1 and 27.')
+    isValid = false
+  }
+  if (!address || !validAddressWords.some(word => address.includes(word))) {
+    setAddressError('Not a valid BU address')
+    isValid = false
+  }
+  if (!contactEmail || !contactEmail.includes('@bu.edu')) {
+    setContactEmailError('Contact email must contain "@bu.edu".')
+    isValid = false
   }
 
-  const handleBlur = () => {
-    if (roomNumber < 1 || roomNumber > 27) {
-      setError('Floor number must be between 1 and 27')
-    }
-  }
-  const validateForm = () => {
-    if (
-      DormType !== 'selectOne' &&
-      DormStyle !== 'selectOne' &&
-      lookingFor !== 'selectOne' &&
-      building !== 'selectOne' // Added Building Location validation
-    ) {
-      return true
-    }else{
-        setFormError('Please make sure to select a value for all fields.')
-        return false
-        
-    }
-  }
+  return isValid
+}
 
   const submitForm = (e) => {
     e.preventDefault()
 
-    if (!validateForm()) {
-        return false // Stop form submission if validation fails
-    }else{
-
+    if (!validateForm()) return // Stop form submission if validation fails
 
     const newListing = {
       building,
@@ -131,7 +157,7 @@ const AddListingPage = ({ addListingSubmit }) => {
         hasPrivateBath
       }
     }
-}
+
     addListingSubmit(newListing)
     navigate('/listings')
   }
@@ -167,6 +193,7 @@ const AddListingPage = ({ addListingSubmit }) => {
                   <option value="Triple">Triple</option>
                   <option value="Quad">Quad</option>
                 </select>
+                {dormTypeError && <p className="text-red-500 text-sm">{dormTypeError}</p>}
               </div>
 
               {/* Dorm Style */}
@@ -190,7 +217,9 @@ const AddListingPage = ({ addListingSubmit }) => {
                   <option value="3 Person Apartment">3 Person Apartment</option>
                   <option value="4 Person Apartment">4 Person Apartment</option>
                   <option value="STUVI I/II">STUVI I/II</option>
+                  
                 </select>
+                {dormStyleError && <p className="text-red-500 text-sm">{dormStyleError}</p>}
               </div>
 
               {/* Looking For */}
@@ -212,6 +241,7 @@ const AddListingPage = ({ addListingSubmit }) => {
                   <option value="Non-Binary/Other">Non-Binary/Other</option>
                   <option value="Gender Neutral">Doesn't Matter (gender neutral)</option>
                 </select>
+                {lookingForError && <p className="text-red-500 text-sm">{lookingForError}</p>}
               </div>
 
               {/* Building Location */}
@@ -237,9 +267,10 @@ const AddListingPage = ({ addListingSubmit }) => {
                   <option value="Whitestones">Whitestones</option>
                   {/* More options... */}
                 </select>
+                {buildingError && <p className="text-red-500 text-sm">{buildingError}</p>}
               </div>
 
-              {/* Building Number */}
+              {/* Floor Number */}
               <div className="mb-4">
                 <label htmlFor="roomNumber" className="block text-gray-700 font-bold mb-2">
                   Please List the Floor Number
@@ -251,17 +282,17 @@ const AddListingPage = ({ addListingSubmit }) => {
                   className="border rounded w-full py-2 px-3 mb-2"
                   placeholder="eg. 208"
                   value={roomNumber}
-                  onChange={handleRoomNumberChange}
-                  onBlur={handleBlur}
+                  onChange={(e) => setRoomNumber(e.target.value)}
                   min="1"
                   max="27"
+                  required
                 />
-                {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+                {roomNumberError && <p className="text-red-500 text-sm mt-1">{roomNumberError}</p>}
               </div>
 
-               {/* Building Number */}
+               {/* Address */}
                <div className="mb-4">
-                <label htmlFor="address" className="block text-gray-700 font-bold mb-2">
+                <label htmlFor="buildingAddress" className="block text-gray-700 font-bold mb-2">
                   Please List the Building Address
                 </label>
                 <input
@@ -273,7 +304,9 @@ const AddListingPage = ({ addListingSubmit }) => {
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                   required
+                  
                 />
+                {addressError && <p className="text-red-500 text-sm">{addressError}</p>}
               </div>
 
               {/* Description */}
@@ -362,7 +395,7 @@ const AddListingPage = ({ addListingSubmit }) => {
               </div>
 
               <div className="mb-4">
-                <label htmlFor="ContactEmail" className="block text-gray-700 font-bold mb-2">
+                <label htmlFor="contactEmail" className="block text-gray-700 font-bold mb-2">
                   Contact Email
                 </label>
                 <input
@@ -375,6 +408,7 @@ const AddListingPage = ({ addListingSubmit }) => {
                   onChange={(e) => setContactEmail(e.target.value)}
                   required
                 />
+                {contactEmailError && <p className="text-red-500 text-sm">{contactEmailError}</p>}
               </div>
 
               {/* Submit Button */}
