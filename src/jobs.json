@@ -9,7 +9,12 @@
       "currentCost": "$12,180",
       "diningPlanRequired": "Yes",
       "tStop": "Babcock T Stop",
-      "diningHall": "West Dining Hall"
+      "diningHall": "West Dining Hall",
+      "pictures": [
+      "https://www.bu.edu/housing/files/2024/05/IMG_2095-scaled.jpg",
+      "https://www.reddit.com/media?url=https%3A%2F%2Fpreview.redd.it%2Fsleeper-hall-photos-here-v0-vgf10iqbhakb1.jpg%3Fwidth%3D1080%26crop%3Dsmart%26auto%3Dwebp%26s%3Dc41dfa55d9fc5217dc456b53ee9f03828238fbc6",
+      "https://www.reddit.com/media?url=https%3A%2F%2Fpreview.redd.it%2Fsleeper-hall-photos-here-v0-h16xmhqbhakb1.jpg%3Fwidth%3D1080%26crop%3Dsmart%26auto%3Dwebp%26s%3D050df215ec05dc2e1872ea0a6fc2ab416d086f34"
+    ]
       
 
 
@@ -24,7 +29,12 @@
       "currentCost": "$12,180",
       "diningPlanRequired": "Yes",
       "tStop": "Babcock T Stop",
-      "diningHall": "West Dining Hall"
+      "diningHall": "West Dining Hall",
+      "pictures": [
+      "https://example.com/images/dormA1.jpg",
+      "https://example.com/images/dormA2.jpg",
+      "https://example.com/images/dormA3.jpg"
+    ]
       
 
 
@@ -39,7 +49,12 @@
       "currentCost": "12,180",
       "diningPlanRequired": "Yes",
       "tStop": "Babcock T Stop",
-      "diningHall": "West Dining Hall"
+      "diningHall": "West Dining Hall",
+      "pictures": [
+      "https://example.com/images/dormA1.jpg",
+      "https://example.com/images/dormA2.jpg",
+      "https://example.com/images/dormA3.jpg"
+    ]
       
 
 
@@ -55,7 +70,12 @@
       "currentCost": "13,930",
       "diningPlanRequired": "Yes",
       "tStop": "Babcock T Stop",
-      "diningHall": "West Dining Hall"
+      "diningHall": "West Dining Hall",
+      "pictures": [
+      "https://example.com/images/dormA1.jpg",
+      "https://example.com/images/dormA2.jpg",
+      "https://example.com/images/dormA3.jpg"
+    ]
       
 
 
@@ -70,7 +90,12 @@
       "currentCost": "$21,020 - 21,690",
       "diningPlanRequired": "Optional",
       "tStop": "Babcock T Stop",
-      "diningHall": "West Dining Hall"
+      "diningHall": "West Dining Hall",
+      "pictures": [
+        "https://example.com/images/dormA1.jpg",
+        "https://example.com/images/dormA2.jpg",
+        "https://example.com/images/dormA3.jpg"
+      ]
       
 
 
@@ -85,7 +110,12 @@
       "currentCost": "$15,990 - 21,690",
       "diningPlanRequired": "Yes if Suite, otherwise Optional",
       "tStop": "Babcock T Stop",
-      "diningHall": "West Dining Hall"
+      "diningHall": "West Dining Hall",
+      "pictures": [
+        "https://example.com/images/dormA1.jpg",
+        "https://example.com/images/dormA2.jpg",
+        "https://example.com/images/dormA3.jpg"
+      ]
       
 
 
@@ -100,7 +130,12 @@
       "currentCost": "$12,180",
       "diningPlanRequired": "Yes",
       "tStop": "Blanford St T Stop",
-      "diningHall": "Marciano Commons"
+      "diningHall": "Marciano Commons",
+      "pictures": [
+      "https://example.com/images/dormA1.jpg",
+      "https://example.com/images/dormA2.jpg",
+      "https://example.com/images/dormA3.jpg"
+    ]
       
 
 
@@ -115,7 +150,12 @@
       "currentCost": "$13,930 - 17,170",
       "diningPlanRequired": "Yes",
       "tStop": "Kenmore T Stop",
-      "diningHall": "Marciano Commons"
+      "diningHall": "Marciano Commons",
+      "pictures": [
+      "https://example.com/images/dormA1.jpg",
+      "https://example.com/images/dormA2.jpg",
+      "https://example.com/images/dormA3.jpg"
+    ]
 
     },
     {
@@ -128,7 +168,12 @@
       "currentCost": "$12,180 - 21,960",
       "diningPlanRequired": "Optional if in Apartment, otherwise Yes",
       "tStop": "East Campus, Blandford St, Kenmore",
-      "diningHall": "Warren Towers or Marciano Commons"
+      "diningHall": "Warren Towers or Marciano Commons",
+      "pictures": [
+      "https://example.com/images/dormA1.jpg",
+      "https://example.com/images/dormA2.jpg",
+      "https://example.com/images/dormA3.jpg"
+    ]
       
 
 
@@ -143,7 +188,12 @@
       "currentCost": "$16,240 - 21,960",
       "diningPlanRequired": "No",
       "tStop": "Central Campus T Stop",
-      "diningHall": "Warren Towers"
+      "diningHall": "Warren Towers",
+      "pictures": [
+      "https://example.com/images/dormA1.jpg",
+      "https://example.com/images/dormA2.jpg",
+      "https://example.com/images/dormA3.jpg"
+    ]
       
 
 
@@ -158,7 +208,12 @@
       "currentCost": "",
       "diningPlanRequired": "Yes",
       "tStop": "Hynes Convention Center",
-      "diningHall": "Marciano Commons"
+      "diningHall": "Marciano Commons",
+      "pictures": [
+      "https://example.com/images/dormA1.jpg",
+      "https://example.com/images/dormA2.jpg",
+      "https://example.com/images/dormA3.jpg"
+    ]
       
 
 
@@ -173,7 +228,12 @@
       "currentCost": "",
       "diningPlanRequired": "Yes",
       "tStop": "Fenway BU Shuttle",
-      "diningHall": "Fenway Dining Hall"
+      "diningHall": "Fenway Dining Hall",
+      "pictures": [
+      "https://example.com/images/dormA1.jpg",
+      "https://example.com/images/dormA2.jpg",
+      "https://example.com/images/dormA3.jpg"
+    ]
       
 
 
@@ -188,7 +248,12 @@
       "currentCost": "",
       "diningPlanRequired": "Yes",
       "tStop": "Fenway BU Shuttle",
-      "diningHall": "Fenway Dining Hall"
+      "diningHall": "Fenway Dining Hall",
+      "pictures": [
+      "https://example.com/images/dormA1.jpg",
+      "https://example.com/images/dormA2.jpg",
+      "https://example.com/images/dormA3.jpg"
+    ]
       
 
 
@@ -203,7 +268,12 @@
       "currentCost": "",
       "diningPlanRequired": "Yes",
       "tStop": "Fenway BU Shuttle",
-      "diningHall": "Fenway Dining Hall"
+      "diningHall": "Fenway Dining Hall",
+      "pictures": [
+      "https://example.com/images/dormA1.jpg",
+      "https://example.com/images/dormA2.jpg",
+      "https://example.com/images/dormA3.jpg"
+    ]
       
 
 
@@ -218,7 +288,12 @@
       "currentCost": "",
       "diningPlanRequired": "Yes",
       "tStop": "Fenway BU Shuttle",
-      "diningHall": "Fenway Dining Hall"
+      "diningHall": "Fenway Dining Hall",
+      "pictures": [
+      "https://example.com/images/dormA1.jpg",
+      "https://example.com/images/dormA2.jpg",
+      "https://example.com/images/dormA3.jpg"
+    ]
       
 
 
@@ -227,13 +302,18 @@
       "id": "khc",
       "building": "Kilachand Hall",
       "address": "91 Baystate Rd",
-      "description":"",
+      "description":"Located just steps away from the bustling Kenmore Square and Fenway Park, Kilachand Hall offers four and five person suites with private bathrooms. The ninth floor study lounge offers stunning views of the Charles River and Fenway Park. Just across the street is also the award winning The Fresh Food Co. at Marciano Commons.",
       "location":"East",
       
-      "currentCost": "Located just steps away from the bustling Kenmore Square and Fenway Park, Kilachand Hall offers four and five person suites with private bathrooms. The ninth floor study lounge offers stunning views of the Charles River and Fenway Park. Just across the street is also the award winning The Fresh Food Co. at Marciano Commons.",
+      "currentCost": "",
       "diningPlanRequired": "Yes",
       "tStop": "Kenmore T Stop",
-      "diningHall": "Marciano Commons"
+      "diningHall": "Marciano Commons",
+      "pictures": [
+      "https://example.com/images/dormA1.jpg",
+      "https://example.com/images/dormA2.jpg",
+      "https://example.com/images/dormA3.jpg"
+    ]
       
 
 
@@ -248,7 +328,12 @@
       "currentCost": "",
       "diningPlanRequired": "Optional if in Apartment, otherwise Yes",
       "tStop": "Central Campus T Stop",
-      "diningHall": "Warren Towers"
+      "diningHall": "Warren Towers",
+      "pictures": [
+      "https://example.com/images/dormA1.jpg",
+      "https://example.com/images/dormA2.jpg",
+      "https://example.com/images/dormA3.jpg"
+    ]
       
 
 
@@ -263,7 +348,12 @@
       "currentCost": "",
       "diningPlanRequired": "Yes",
       "tStop": "Blanford St T Stop",
-      "diningHall": "Marciano Commons"
+      "diningHall": "Marciano Commons",
+      "pictures": [
+      "https://example.com/images/dormA1.jpg",
+      "https://example.com/images/dormA2.jpg",
+      "https://example.com/images/dormA3.jpg"
+    ]
 
 
     },
@@ -277,7 +367,12 @@
       "currentCost": "",
       "diningPlanRequired": "Yes",
       "tStop": "East Campus T Stop",
-      "diningHall": "Warren Towers"
+      "diningHall": "Warren Towers",
+      "pictures": [
+      "https://example.com/images/dormA1.jpg",
+      "https://example.com/images/dormA2.jpg",
+      "https://example.com/images/dormA3.jpg"
+    ]
       
 
 
