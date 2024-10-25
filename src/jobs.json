@@ -2,87 +2,21 @@
     "jobs": [
       {
         "id": "1",
-        "building": "Sleeper Hall | West Campus",
-        "DormType": "Double in Dorm",
-        "description": "West Campus includes three dormitory-style residence halls: Claflin Hall, Sleeper Hall, and Rich Hall. Bedrooms are primarily double-occupancy, with a limited number of single, triple, and quad occupancy available. Bathrooms are communal. These residence halls are not air-conditioned. Each bedroom features a single bed, desk, dresser, and closet per guest.",
-        "address": "277 Babcock St, 605",
-        "costDifference": "$12K",
-        "company": {
-          "name": "NewTek Solutions",
-          "description": "NewTek Solutions is a leading technology company specializing in web development and digital solutions. We pride ourselves on delivering high-quality products and services to our clients while fostering a collaborative and innovative work environment.",
-          "contactEmail": "contact@teksolutions.com",
-          "contactPhone": "555-555-5555"
-        }
-      },
-      {
-        "id": "2",
-        "building": "South Campus",
-        "DormType": "Single in 4 Person Apt",
-        "address": "42 Buswell St, 112",
-        "description": "South Campus is a tranquil, private neighborhood along St. Mary’s and surrounding streets in the Charles River Campus. A short walk across Beacon Street puts you in the Fenway area and the center of campus. Nearby, you’ll find groceries, restaurants, shops, and within walking distance to the College of Engineering and the College of Communications. Roaming farther afield is easy, too. While all campus areas are right by the B-line, South sits between the B- and C-lines, giving you greater access to the rest of Boston.",
-        "costDifference": "19K",
-        "company": {
-          "name": "Veneer Solutions",
-          "description": "Veneer Solutions is a creative agency specializing in digital design and development. Our team is dedicated to pushing the boundaries of creativity and innovation to deliver exceptional results for our clients.",
-          "contactEmail": "contact@loremipsum.com",
-          "contactPhone": "555-555-5555"
-        }
-      },
-      {
-        "id": "3",
-        "building": "BayState Road",
-        "DormType": "Quad in Dorm",
-        "address": "208 Baystate Rd, 311",
-        "description": "The Bay State Road neighborhood is located within walking distance of all Charles River Campus academic facilities, University services, and MBTA subway and bus transportation. Adjacent to Kenmore Square, Bay State Road is an easy walk from Fenway Park. The Boston University shuttle — the BUS – offers transportation to the Fitness and Recreation Center and other West Campus facilities and services, as well as between the Charles River, Medical and Fenway campuses.",
-        "costDifference": "15K",
-        "company": {
-          "name": "Dolor Cloud",
-          "description": "Dolor Cloud is a leading technology company specializing in digital solutions for businesses of all sizes. With a focus on innovation and customer satisfaction, we are committed to delivering cutting-edge products and services.",
-          "contactEmail": "contact@dolorsitamet.com",
-          "contactPhone": "555-555-5555"
-        }
-      },
-      {
-        "id": "4",
-        "building": "Warren Towers | A",
-        "DormType": "Single in Dorm",
-        "description": "Warren Towers is BU’s biggest traditional style residence. It consists of three towers and is a great place to get to know people. With its central location, in residence dining hall The Fresh Food Co. at Warren Towers, laundry rooms, mail services, and study rooms, it makes it one of our most popular living options for students who want it all.",
-        "address": "700 Commonwealth Ave, 502",
-        "costDifference": "11K",
-        "company": {
-          "name": "Alpha Elite",
-          "description": "Alpha Elite is a dynamic startup specializing in digital marketing and web development. We are committed to fostering a diverse and inclusive workplace where creativity and innovation thrive.",
-          "contactEmail": "contact@adipisicingelit.com",
-          "contactPhone": "555-555-5555"
-        }
-      },
-      {
-        "id": "5",
-        "building": "610 Beacon St",
-        "DormType": "Double in Suite",
-        "description": "610 Beacon Street is located at the heart of Kenmore Square. It is steps away from Fenway Park, restaurants, shops, and the famous Citgo sign. Just steps away you will also find on-campus dining at The Fresh Food Co. at Marciano Commons.",
-        "address": "610 Beacon St, 322",
-        "costDifference": "16K",
-        "company": {
-          "name": "Browning Technologies",
-          "description": "Browning Technologies is a rapidly growing technology company specializing in e-commerce solutions. We offer a dynamic and collaborative work environment where employees are encouraged to think creatively and innovate.",
-          "contactEmail": "contact@consecteturadipisicing.com",
-          "contactPhone": "555-555-5555"
-        }
-      },
-      {
-        "id": "6",
-        "building": "STUVI II",
-        "DormType": "Studio Apartment",
-        "description": "They have all the bells and whistles of modern urban living and stand just around the corner from the University’s Fitness & Recreation Center (FitRec), Agganis Arena, restaurants, shops, and music venues. But the best part is the buzz generated by living in a village of your peers, all part of Terrier nation. There’re endless opportunities to meet new people and have your closest friends as neighbors. This is your community: make it what you want.",
-        "address": "33 Harry Agganis Way, 2708",
-        "costDifference": "24K",
-        "company": {
-          "name": "Port Solutions INC",
-          "description": "Port Solutions is a leading technology company specializing in software development and digital marketing. We are committed to providing our clients with cutting-edge solutions and our employees with a supportive and rewarding work environment.",
-          "contactEmail": "contact@ipsumlorem.com",
-          "contactPhone": "555-555-5555"
-        }
+        "building": "STUVII 2",
+        "DormType": "Double",
+        "DormStyle": "Dorm",
+        "address": "208 baystate rd, 311",
+        "lookingFor": "Male",
+        "buildingNumber": "208",
+        "description": "blah blah blah",
+        "currentCost": "11,000",
+        "costDifference": "19,000+",
+        "aboutRoommate":{
+          "description": "hello"
+          
+        },
+        "contactEmail": "jaydenc@bu.edu"
+        
       }
     ]
 }
