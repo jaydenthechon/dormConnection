@@ -1,6 +1,286 @@
 {
   "Dorms": [
-    {}
+    {
+      "id": "Sleeper",
+      "building": "West Campus (Sleeper Hall)",
+      "address": "275 Babcock Street",
+      "description":"",
+      "location":"West Campus",
+      "currentCost": "",
+      "diningPlanRequired": "Yes",
+      "tStop": "Babcock T Stop",
+      "diningHall": "West Dining Hall"
+      
+
+
+    },
+    {
+      "id": "Claflin",
+      "building": "West Campus (Claflin Hall)",
+      "address": "273 Babcock Street",
+      "description":"",
+      "location":"West Campus",
+      
+      "currentCost": "",
+      "diningPlanRequired": "Yes",
+      "tStop": "Babcock T Stop",
+      "diningHall": "West Dining Hall"
+      
+
+
+    },
+    {
+      "id": "Rich",
+      "building": "West Campus (Rich Hall)",
+      "address": "277 Babcock Street",
+      "description":"",
+      "location":"West Campus",
+      
+      "currentCost": "",
+      "diningPlanRequired": "Yes",
+      "tStop": "Babcock T Stop",
+      "diningHall": "West Dining Hall"
+      
+
+
+    },
+    {
+      "id": "1019",
+      "building": "1019 Commonwealth Ave",
+      "address": "1019 Commonwealth Ave",
+      "description":"",
+      "location":"West Campus",
+      
+      "currentCost": "",
+      "diningPlanRequired": "Yes",
+      "tStop": "Babcock T Stop",
+      "diningHall": "West Dining Hall"
+      
+
+
+    },
+    {
+      "id": "stuvi1",
+      "building": "STUVI I",
+      "address": "10 Buick St",
+      "description":"",
+      "location":"West Campus",
+      
+      "currentCost": "",
+      "diningPlanRequired": "Optional",
+      "tStop": "Babcock T Stop",
+      "diningHall": "West Dining Hall"
+      
+
+
+    },
+    {
+      "id": "stuvi2",
+      "building": "STUVI II",
+      "address": "33 Harry Agganis Way",
+      "description":"",
+      "location":"West Campus",
+      
+      "currentCost": "",
+      "diningPlanRequired": "Yes if Suite, otherwise Optional",
+      "tStop": "Babcock T Stop",
+      "diningHall": "West Dining Hall"
+      
+
+
+    },
+    {
+      "id": "hojo",
+      "building": "575 Commonwealth Ave (Hojo)",
+      "address": "575 Commonwealth Ave",
+      "description":"",
+      "location":"East Campus",
+      
+      "currentCost": "",
+      "diningPlanRequired": "Yes",
+      "tStop": "Blanford St T Stop",
+      "diningHall": "Marciano Commons"
+      
+
+
+    },
+    {
+      "id": "myles",
+      "building": "610 Beacon St",
+      "address": "610 Beacon Street",
+      "description":"",
+      "location":"East Campus",
+      
+      "currentCost": "",
+      "diningPlanRequired": "Yes",
+      "tStop": "Kenmore T Stop",
+      "diningHall": "Marciano Commons"
+
+    },
+    {
+      "id": "baystate",
+      "building": "Baystate Rd Brownstones",
+      "address": "214 - 90 Baystate Rd",
+      "description":"",
+      "location":"Central to East Campus",
+      
+      "currentCost": "",
+      "diningPlanRequired": "Optional if in Apartment, otherwise Yes",
+      "tStop": "East Campus, Blandford St, Kenmore",
+      "diningHall": "Warren Towers or Marciano Commons"
+      
+
+
+    },
+    {
+      "id": "whitestones",
+      "building": "Commonwealth Ave Brownstones",
+      "address": "728 - 627 Baystate Rd",
+      "description":"",
+      "location":"Central Campus",
+      
+      "currentCost": "",
+      "diningPlanRequired": "No",
+      "tStop": "Central Campus T Stop",
+      "diningHall": "Warren Towers"
+      
+
+
+    },
+    {
+      "id": "danielson",
+      "building": "Danielson Hall",
+      "address": "512 Beacon St",
+      "description":"",
+      "location":"East Campus (near Newbury St)",
+      
+      "currentCost": "",
+      "diningPlanRequired": "Yes",
+      "tStop": "Hynes Convention Center",
+      "diningHall": "Marciano Commons"
+      
+
+
+    },
+    {
+      "id": "fenway1",
+      "building": "Riverway House",
+      "address": "162 Riverway",
+      "description":"",
+      "location":"Fenway Campus",
+      
+      "currentCost": "",
+      "diningPlanRequired": "Yes",
+      "tStop": "Fenway BU Shuttle",
+      "diningHall": "Fenway Dining Hall"
+      
+
+
+    },
+    {
+      "id": "fenway2",
+      "building": "Pilgrim House",
+      "address": "37 Pilgrim Rd",
+      "description":"",
+      "location":"Fenway Campus",
+      
+      "currentCost": "",
+      "diningPlanRequired": "Yes",
+      "tStop": "Fenway BU Shuttle",
+      "diningHall": "Fenway Dining Hall"
+      
+
+
+    },
+    {
+      "id": "fenway3",
+      "building": "Longwood House",
+      "address": "154 Riverway",
+      "description":"",
+      "location":"Fenway Campus",
+      
+      "currentCost": "",
+      "diningPlanRequired": "Yes",
+      "tStop": "Fenway BU Shuttle",
+      "diningHall": "Fenway Dining Hall"
+      
+
+
+    },
+    {
+      "id": "fenway4",
+      "building": "Campus Center & Student Residence",
+      "address": "150 Riverway",
+      "description":"",
+      "location":"Fenway Campus",
+      
+      "currentCost": "",
+      "diningPlanRequired": "Yes",
+      "tStop": "Fenway BU Shuttle",
+      "diningHall": "Fenway Dining Hall"
+      
+
+
+    },
+    {
+      "id": "khc",
+      "building": "Kilachand Hall",
+      "address": "91 Baystate Rd",
+      "description":"",
+      "location":"East",
+      
+      "currentCost": "",
+      "diningPlanRequired": "Yes",
+      "tStop": "Kenmore T Stop",
+      "diningHall": "Marciano Commons"
+      
+
+
+    },
+    {
+      "id": "south",
+      "building": "South Campus",
+      "address": "Park St, Mountfort St, Buswell St, Arundel St, Beacon St",
+      "description":"",
+      "location":"South Campus",
+      
+      "currentCost": "",
+      "diningPlanRequired": "Optional if in Apartment, otherwise Yes",
+      "tStop": "Central Campus T Stop",
+      "diningHall": "Warren Towers"
+      
+
+
+    },
+    {
+      "id": "towers",
+      "building": "Towers",
+      "address": "140 Baystate Rd",
+      "description":"",
+      "location":"East Campus",
+      
+      "currentCost": "",
+      "diningPlanRequired": "Yes",
+      "tStop": "Blanford St T Stop",
+      "diningHall": "Marciano Commons"
+
+
+    },
+    {
+      "id": "warren",
+      "building": "Warren Towers",
+      "address": "700 Commonwealth Ave",
+      "description":"",
+      "location":"Central Campus",
+      
+      "currentCost": "",
+      "diningPlanRequired": "Yes",
+      "tStop": "East Campus T Stop",
+      "diningHall": "Warren Towers"
+      
+
+
+    }
   ],
   "jobs": [
     {
@@ -13,7 +293,11 @@
       "lookingFor": "Male",
       "floorNumber": "12",
       "description": "-has built in dining hall\n-bike storage room\n-laundry room\n-good to meet freshmen\n-communal bathrooms suck\n-blah blah balh",
+      
       "currentCost": "",
+      "diningPlanRequired": ""
+      
+      ,
       "costDifference": "",
       "contactEmail": "test@bu.edu",
       "aboutRoommate": {
@@ -41,7 +325,11 @@
       "lookingFor": "Female",
       "floorNumber": "10",
       "description": "-faces teh charles\n-good views\n-meow meow meow\n-CDS\n-dining hall",
+      
       "currentCost": "",
+      "diningPlanRequired": ""
+      
+      ,
       "costDifference": "",
       "contactEmail": "test2@bu.edu",
       "aboutRoommate": {
@@ -69,7 +357,11 @@
       "lookingFor": "Gender Neutral",
       "floorNumber": "3",
       "description": "njjhgfyioo",
+      
       "currentCost": "",
+      "diningPlanRequired": ""
+      
+      ,
       "costDifference": "",
       "contactEmail": "oliviama@bu.edu",
       "aboutRoommate": {
@@ -97,7 +389,11 @@
       "lookingFor": "Non-Binary/Other",
       "floorNumber": "27",
       "description": "asdfasdf",
+      
       "currentCost": "",
+      "diningPlanRequired": ""
+      
+      ,
       "costDifference": "",
       "contactEmail": "test3@bu.edu",
       "aboutRoommate": {
@@ -125,7 +421,11 @@
       "lookingFor": "Non-Binary/Other",
       "floorNumber": "4",
       "description": "must have huge bagoingas",
+      
       "currentCost": "",
+      "diningPlanRequired": ""
+      
+      ,
       "costDifference": "",
       "contactEmail": "ihu21@bu.edu",
       "aboutRoommate": {

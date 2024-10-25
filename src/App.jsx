@@ -8,6 +8,7 @@ import SingleListing, { listingLoader } from './pages/singleListing'
 import AddListingPage from './pages/AddListingPage'
 import LoginPage from './pages/LoginPage'
 import ExploreDorms from './pages/ExploreDorms'
+import SingleDorm, {dormLoader} from './pages/SingleDorm'
 
 const App = () => {
   // Function to handle adding a listing
@@ -48,6 +49,7 @@ const App = () => {
         <Route path="/add-listings" element={<AddListingPage addListingSubmit={addListing} />} />
         <Route path="/listings/:id" element={<SingleListing />} loader={listingLoader} />
         <Route path='/Explore-Dorms' element={<ExploreDorms/>}/>
+        <Route path='/SingleDorm' element={<SingleDorm/>} loader={dormLoader}/>
         <Route path="/login" element={<LoginPage onLoginSubmit={handleLogin} />} /> {/* Expanded route */}
         <Route path="*" element={<NotFound />} />
       </Route>
