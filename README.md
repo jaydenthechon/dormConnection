@@ -3,6 +3,7 @@ Wondering which dorms are available for direct swap? Meet DormConnection. A way 
 Coming Soon:
 Login Page -> BU ID
 Explore Dorms
+Pictures
 
 Edit and Delete Listings
   Limit Listings to one per Login
