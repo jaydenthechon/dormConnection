@@ -15,8 +15,8 @@ const Dorm = ({ dorm }) => {
     <div className="bg-white rounded-xl shadow-md relative">
       <div className="p-4">
         <div className="mb-6">
-          <div className="text-gray-600 my-2">{dorm.building}</div>
-          <h3 className="text-xl font-bold">{dorm.DormType}</h3>
+          <div className="text-gray-600 my-2">{dorm.location}</div>
+          <h3 className="text-xl font-bold">{dorm.building}</h3>
         </div>
 
         <div className="mb-5">{description}</div>
@@ -28,7 +28,7 @@ const Dorm = ({ dorm }) => {
           {showFullDescription ? 'Less' : 'More'}
         </button>
 
-        <h3 className="text-indigo-500 mb-2">{dorm.cost} / Year</h3>
+        <h3 className="text-indigo-500 mb-2">{dorm.currentCost} / Year</h3>
 
         <div className="border border-gray-100 mb-5"></div>
 

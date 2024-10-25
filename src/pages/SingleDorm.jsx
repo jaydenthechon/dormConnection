@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, useLoaderData } from 'react-router-dom';
 import { FaArrowLeft, FaMapMarker } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -6,6 +6,15 @@ import { Link } from 'react-router-dom';
 const SingleDorm = () => {
   const { id } = useParams();
   const Dorms = useLoaderData();
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const openImageModal = (image) => {
+    setSelectedImage(image);
+  };
+
+  const closeImageModal = () => {
+    setSelectedImage(null);
+  };
 
   return (
     <>
@@ -49,6 +58,17 @@ const SingleDorm = () => {
             <aside>
               <div className="bg-white p-6 rounded-lg shadow-md">
                 <h3 className="text-xl font-bold mb-6">Pictures</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  {Dorms.pictures?.map((picture, index) => (
+                    <img
+                      key={index}
+                      src={picture}
+                      alt={`Dorm Picture ${index + 1}`}
+                      className="cursor-pointer w-full h-auto rounded-md shadow-md"
+                      onClick={() => openImageModal(picture)}
+                    />
+                  ))}
+                </div>
                 <p className="my-2">{Dorms.roommateInfo}</p>
                 <hr className="my-4" />
               </div>
@@ -56,6 +76,16 @@ const SingleDorm = () => {
           </div>
         </div>
       </section>
+
+      {/* Modal for Full-Size Image */}
+      {selectedImage && (
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center" onClick={closeImageModal}>
+          <div className="relative">
+            <span className="absolute top-2 right-2 text-white text-3xl cursor-pointer" onClick={closeImageModal}>&times;</span>
+            <img src={selectedImage} alt="Selected Dorm" className="max-w-full max-h-screen rounded-lg" />
+          </div>
+        </div>
+      )}
     </>
   );
 };
@@ -66,4 +96,4 @@ const dormLoader = async ({ params }) => {
   return data;
 };
 
-export { SingleDorm as default, dormLoader};
+export { SingleDorm as default, dormLoader };

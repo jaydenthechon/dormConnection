@@ -167,6 +167,7 @@ const AddListingPage = ({ addListingSubmit }) => {
           <div className="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
             <form onSubmit={submitForm}>
               <h2 className="text-3xl text-center font-semibold mb-6">Listing Form</h2>
+              <p className="text-center font-semibold mb-3">You May Only have One Listing Avaliable at a Time</p>
 
               {/* Dorm Type */}
               <div className="mb-4">
