@@ -1,6 +1,6 @@
 import React from 'react'
 
-
+//The basis for the website
 const Hero = () => {
   return (
     

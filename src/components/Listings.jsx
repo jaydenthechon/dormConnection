@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import Listing from './Listing';
 
+//A page that shows multiple listings 
 const Listings = ({ isHome = false }) => {
   const [listing, setListing] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [sortOption, setSortOption] = useState(''); // For sorting options
+  const [sortOption, setSortOption] = useState(''); // For sorting options (not yet implemented)
 
   useEffect(() => {
     const fetchListings = async () => {
-      const apiUrl = isHome ? '/api/jobs?_limit=3' : '/api/jobs';
+      const apiUrl = isHome ? '/api/listings?_limit=3' : '/api/listings';
       try {
         const res = await fetch(apiUrl);
         const data = await res.json();
@@ -67,8 +68,8 @@ const Listings = ({ isHome = false }) => {
             <h2>Loading...</h2>
           ) : (
             <>
-              {listing.map((jobs) => (
-                <Listing key={jobs.id} job={jobs} />
+              {listing.map((listings) => (
+                <Listing key={listings.id} listing={listings} />
               ))}
             </>
           )}

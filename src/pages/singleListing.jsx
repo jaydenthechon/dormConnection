@@ -105,7 +105,7 @@ const SingleListing = () => {
 };
 
 const listingLoader = async ({params}) => {
-  const res = await fetch(`/api/jobs/${params.id}`)
+  const res = await fetch(`/api/listings/${params.id}`)
   const data = await res.json()
   return data
 }

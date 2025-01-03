@@ -14,7 +14,7 @@ import SingleDorm, {dormLoader} from './pages/SingleDorm'
 const App = () => {
   // Function to handle adding a listing
   const addListing = async (newListing) => {
-    await fetch('/api/jobs', {
+    await fetch('/api/listings', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
