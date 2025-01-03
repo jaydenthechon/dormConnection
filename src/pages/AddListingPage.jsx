@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-
+{/* Filling out the form for adding a new listing */}
 const AddListingPage = ({ addListingSubmit }) => {
   // Basic fields
   const [building, setBuilding] = useState('')

@@ -1,6 +1,9 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
+
+{/* The middle part of the Home Page where people have the option to navigate to browse dorms or add their own listing */}
+
 const Rooms = () => {
   return (
     <section className="py-4">

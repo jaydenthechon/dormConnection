@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Dorm from './Dorm';
 
+//Structure for the list of Dorms on campus
 const Dorms = () => {
   const [dorms, setDorms] = useState([]);
   const [loading, setLoading] = useState(true);

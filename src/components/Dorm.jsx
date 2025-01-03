@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { FaMapMarker } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
+//Structure for a Dorm on campus
+
 const Dorm = ({ dorm }) => {
   const [showFullDescription, setShowFullDescription] = useState(false);
 

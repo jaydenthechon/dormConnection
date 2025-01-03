@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import logo from '../assets/images/logo.png';
 import { NavLink } from 'react-router-dom';
 
+//Navigation Bar
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false); // State to track menu toggle
 
