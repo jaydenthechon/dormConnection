@@ -9,7 +9,7 @@ const Listings = ({ isHome = false }) => {
 
   useEffect(() => {
     const fetchListings = async () => {
-      const apiUrl = isHome ? '/api/listings?_limit=3' : '/api/listings';
+      const apiUrl = isHome ? '/api/listings?_limit=3' : '/api/listings'; //if at home page then only show 3 listings (recency?)
       try {
         const res = await fetch(apiUrl);
         const data = await res.json();

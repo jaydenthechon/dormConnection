@@ -3,6 +3,8 @@ import { useParams, useLoaderData } from 'react-router-dom';
 import { FaArrowLeft, FaMapMarker } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
+
+{/** For each dorm selected from the dorm listing, it shows a detailed version of the specifics of the dorm (NOT INPUTTED LISTING) */}
 const SingleDorm = () => {
   const { id } = useParams();
   const Dorms = useLoaderData();
