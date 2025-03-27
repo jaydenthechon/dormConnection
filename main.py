@@ -1,8 +1,8 @@
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import RedirectResponse
 from fastapi.responses import Response  # Add missing import for Response
-from onelogin.saml2.auth import OneLogin_Saml2_Auth
-from onelogin.saml2.utils import OneLogin_Saml2_Utils
+from onelogin.saml.auth import OneLogin_Saml2_Auth
+from onelogin.saml.utils import OneLogin_Saml2_Utils
 from urllib.parse import urlparse  # Add missing import for urlparse
 
 app = FastAPI()

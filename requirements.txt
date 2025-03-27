@@ -2,3 +2,7 @@ fastapi
 uvicorn
 onelogin
 requests
+python-dotenv
+orjson
+pydantic
+python3-saml
