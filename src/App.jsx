@@ -13,46 +13,16 @@ import SingleDorm, {dormLoader} from './pages/SingleDorm'
 //test
 
 const App = () => {
-  // Function to handle adding a listing
-  const addListing = async (newListing) => {
-    await fetch('/api/listings', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newListing),
-    });
-  };
-
-  // Function to handle login submission
-  const handleLogin = async (loginData) => {
-    const res = await fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(loginData),
-    });
-
-    if (res.ok) {
-      // Handle successful login (e.g., redirect or store token)
-      console.log("Login successful");
-    } else {
-      // Handle failed login (e.g., show error)
-      console.log("Login failed");
-    }
-  };
-
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<MainLayout />}>
         <Route index element={<HomePage />} />
         <Route path="/listings" element={<ListingPage />} />
-        <Route path="/add-listings" element={<AddListingPage addListingSubmit={addListing} />} />
+        <Route path="/add-listings" element={<AddListingPage />} />
         <Route path="/listings/:id" element={<SingleListing />} loader={listingLoader} />
         <Route path="/Explore-Dorms" element={<ExploreDorms />} />
         <Route path="/Dorms/:id" element={<SingleDorm />} loader={dormLoader} />
-        <Route path="/login" element={<LoginPage onLoginSubmit={handleLogin} />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     )

@@ -4,4 +4,6 @@ requests
 python-dotenv
 orjson
 pydantic
-python3-saml
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
