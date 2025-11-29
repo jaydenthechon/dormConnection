@@ -1,0 +1,63 @@
+{
+    "strict": true,
+    "debug": true,
+    "sp": {
+        "entityId": "https://your-domain.com/metadata",
+        "assertionConsumerService": {
+            "url": "https://your-domain.com/api/saml/acs",
+            "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+        },
+        "singleLogoutService": {
+            "url": "https://your-domain.com/api/saml/slo",
+            "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+        },
+        "NameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+        "x509cert": "",
+        "privateKey": ""
+    },
+    "idp": {
+        "entityId": "https://shib.bu.edu/idp/shibboleth",
+        "singleSignOnService": {
+            "url": "https://shib.bu.edu/idp/profile/SAML2/Redirect/SSO",
+            "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+        },
+        "singleLogoutService": {
+            "url": "https://shib.bu.edu/idp/profile/SAML2/Redirect/SLO",
+            "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+        },
+        "x509cert": "YOUR_BU_IDP_CERTIFICATE_HERE"
+    },
+    "security": {
+        "nameIdEncrypted": false,
+        "authnRequestsSigned": false,
+        "logoutRequestSigned": false,
+        "logoutResponseSigned": false,
+        "signMetadata": false,
+        "wantMessagesSigned": false,
+        "wantAssertionsSigned": true,
+        "wantNameId": true,
+        "wantNameIdEncrypted": false,
+        "wantAssertionsEncrypted": false,
+        "allowSingleLabelDomains": false,
+        "signatureAlgorithm": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+        "digestAlgorithm": "http://www.w3.org/2001/04/xmlenc#sha256",
+        "rejectDeprecatedAlgorithm": true
+    },
+    "contactPerson": {
+        "technical": {
+            "givenName": "Technical Support",
+            "emailAddress": "tech-support@your-domain.com"
+        },
+        "support": {
+            "givenName": "Support Team",
+            "emailAddress": "support@your-domain.com"
+        }
+    },
+    "organization": {
+        "en-US": {
+            "name": "DormConnection",
+            "displayname": "DormConnection - BU Student Housing",
+            "url": "https://your-domain.com"
+        }
+    }
+}
