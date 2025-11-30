@@ -35,9 +35,13 @@ __pycache__/
 venv/
 env/
 ENV/
+.venv/
 
 # SAML certificates (never commit these!)
 saml/*.key
 saml/*.crt
 saml/certs/
+
+# Nested git repositories
+dormConnection/
 

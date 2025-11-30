@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
 {/* Filling out the form for adding a new listing */}
 const AddListingPage = ({ addListingSubmit }) => {
+  const { user, isAuthenticated } = useAuth()
+  const navigate = useNavigate()
+  
+  const [loading, setLoading] = useState(true)
+  const [hasExistingListing, setHasExistingListing] = useState(false)
+  const [existingListingId, setExistingListingId] = useState(null)
+  const [error, setError] = useState('')
+  
   // Basic fields
   const [building, setBuilding] = useState('')
   const [TradeDescription, setTradeDescription] = useState('')
@@ -30,7 +39,58 @@ const AddListingPage = ({ addListingSubmit }) => {
   const [hasElevator, setHasElevator] = useState(false)
   const [hasPrivateBath, setHasPrivateBath] = useState(false)
 
-  const navigate = useNavigate()
+  // Check authentication and existing listings on mount
+  useEffect(() => {
+    const checkUserStatus = async () => {
+      if (!isAuthenticated) {
+        navigate('/login')
+        return
+      }
+
+      try {
+        const response = await fetch('/api/auth/user', {
+          credentials: 'include'
+        })
+        
+        if (response.ok) {
+          const data = await response.json()
+          if (data.hasListing) {
+            setHasExistingListing(true)
+            setExistingListingId(data.listingId)
+          }
+        }
+      } catch (err) {
+        console.error('Error checking user status:', err)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    checkUserStatus()
+  }, [isAuthenticated, navigate])
+
+  const handleDeleteListing = async () => {
+    if (!existingListingId) return
+    
+    try {
+      const response = await fetch(`/api/listings/${existingListingId}`, {
+        method: 'DELETE',
+        credentials: 'include'
+      })
+      
+      if (response.ok) {
+        setHasExistingListing(false)
+        setExistingListingId(null)
+        setError('')
+      } else {
+        const data = await response.json()
+        setError(data.detail || 'Failed to delete listing')
+      }
+    } catch (err) {
+      setError('Error deleting listing')
+      console.error(err)
+    }
+  }
 
   // Update TradeDescription whenever DormType or DormStyle changes
   useEffect(() => {
@@ -122,10 +182,15 @@ const AddListingPage = ({ addListingSubmit }) => {
     return isValid
   }
 
-  const submitForm = (e) => {
-    e.preventDefault() //prevent default form from being submitted (possibly redundant code)
+  const submitForm = async (e) => {
+    e.preventDefault()
 
-    if (!validateForm()) return // Stop form submission if validation fails
+    if (!validateForm()) return
+
+    if (hasExistingListing) {
+      setError('You already have an active listing. Please delete it first.')
+      return
+    }
 
     const newListing = {
       building,
@@ -155,8 +220,38 @@ const AddListingPage = ({ addListingSubmit }) => {
       }
     }
 
-    addListingSubmit(newListing)
-    navigate('/listings')
+    try {
+      const response = await fetch('/api/listings', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify(newListing)
+      })
+
+      if (response.ok) {
+        const data = await response.json()
+        alert('Listing created successfully!')
+        navigate('/listings')
+      } else {
+        const data = await response.json()
+        setError(data.detail || 'Failed to create listing')
+      }
+    } catch (err) {
+      setError('Error creating listing')
+      console.error(err)
+    }
+  }
+
+  if (loading) {
+    return (
+      <section className="bg-indigo-50 min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-indigo-700">Loading...</h2>
+        </div>
+      </section>
+    )
   }
 
 
@@ -165,9 +260,41 @@ const AddListingPage = ({ addListingSubmit }) => {
       <section className="bg-indigo-50">
         <div className="container m-auto max-w-2xl py-24">
           <div className="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
-            <form onSubmit={submitForm}>
-              <h2 className="text-3xl text-center font-semibold mb-6">Listing Form</h2>
-              <p className="text-center font-semibold mb-3">You May Only have One Listing Avaliable at a Time</p>
+            {hasExistingListing ? (
+              <div className="text-center">
+                <h2 className="text-3xl font-semibold mb-6 text-red-600">
+                  You Already Have an Active Listing
+                </h2>
+                <p className="mb-6 text-gray-700">
+                  You can only have one listing at a time. Please delete your current listing before creating a new one.
+                </p>
+                <button
+                  onClick={handleDeleteListing}
+                  className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full mb-4"
+                >
+                  Delete Current Listing
+                </button>
+                <br />
+                <button
+                  onClick={() => navigate('/listings')}
+                  className="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full"
+                >
+                  View My Listing
+                </button>
+                {error && (
+                  <p className="text-red-500 mt-4">{error}</p>
+                )}
+              </div>
+            ) : (
+              <form onSubmit={submitForm}>
+                <h2 className="text-3xl text-center font-semibold mb-6">Listing Form</h2>
+                <p className="text-center font-semibold mb-3 text-red-600">You May Only Have One Listing Available at a Time</p>
+                
+                {error && (
+                  <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                    <p className="text-red-800 text-sm">{error}</p>
+                  </div>
+                )}
 
               {/* Dorm Type */}
               <div className="mb-4">
@@ -429,6 +556,7 @@ const AddListingPage = ({ addListingSubmit }) => {
                 </button>
               </div>
             </form>
+            )}
           </div>
         </div>
       </section>
