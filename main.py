@@ -14,10 +14,15 @@ load_dotenv()
 
 app = FastAPI()
 
-# CORS configuration for development
+# CORS configuration for development and production
+# Add your Vercel deployment URL after deploying frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Vite dev server
+    allow_origins=[
+        "http://localhost:5173",  # Local development
+        "https://dorm-connection.vercel.app/",   # Vercel preview deployments
+        # Add your production URL here after deployment
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
