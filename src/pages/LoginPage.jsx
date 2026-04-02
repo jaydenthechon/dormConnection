@@ -53,7 +53,7 @@ const LoginPage = () => {
           <h1 className="text-4xl font-bold text-indigo-700 mb-2">
             DormConnection
           </h1>
-          <p className="text-gray-600">Boston University Student Housing</p>
+          <p className="text-gray-600">Boston University Dorm Swap Marketplace</p>
         </div>
 
         {error && (
@@ -121,8 +121,7 @@ const LoginPage = () => {
 
           <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
             <p className="text-blue-800 text-sm">
-              <strong>Testing Mode:</strong> Sign in with any Gmail account to test the application.
-              In production, this will be restricted to @bu.edu emails only.
+              <strong>BU Access:</strong> Use Google sign-in with any Gmail account to browse and post BU dorm swap listings.
             </p>
           </div>
 

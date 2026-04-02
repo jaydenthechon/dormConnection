@@ -23,7 +23,7 @@ const SingleDorm = () => {
     <>
       <section>
         <div className="container m-auto py-6 px-6">
-          <Link to="/Explore-Dorms" className="text-indigo-500 hover:text-indigo-600 flex items-center">
+          <Link to="/explore-dorms" className="text-indigo-500 hover:text-indigo-600 flex items-center">
             <FaArrowLeft className='mr-2' /> Back to Dorms
           </Link>
         </div>

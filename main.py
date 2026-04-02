@@ -6,7 +6,9 @@ import time
 from dotenv import load_dotenv
 from urllib.parse import urlparse, urlencode
 import json
+import re
 from typing import Any, Dict, List, Optional
+from datetime import datetime
 from google.oauth2 import id_token
 from google.auth.transport import requests as google_requests
 from google_auth_oauthlib.flow import Flow
@@ -55,8 +57,9 @@ def get_cookie_settings(request: Request) -> Dict[str, Any]:
     }
 
 def load_seed_data() -> Dict[str, Any]:
+    seed_file_path = os.path.join(os.path.dirname(__file__), 'src', 'listings.json')
     try:
-        with open('src/listings.json', 'r') as f:
+        with open(seed_file_path, 'r') as f:
             return json.load(f)
     except FileNotFoundError:
         return {}
@@ -89,10 +92,62 @@ GOOGLE_CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET')
 GOOGLE_REDIRECT_URI = os.getenv('GOOGLE_REDIRECT_URI', 'http://localhost:8000/api/auth/google/callback')
 
 def validate_email(email: str) -> bool:
-    """Validate that email is from allowed domain (gmail.com for testing)"""
-    # For testing, allow any gmail.com email
-    # In production, change this back to @bu.edu
-    return email.lower().endswith('@gmail.com')
+    """Validate email format for Google-authenticated users"""
+    return bool(email and '@' in email and '.' in email.split('@')[-1])
+
+def parse_price_value(raw_value: Any) -> Optional[float]:
+    if raw_value is None:
+        return None
+
+    if isinstance(raw_value, (int, float)):
+        return float(raw_value)
+
+    if not isinstance(raw_value, str):
+        return None
+
+    matches = re.findall(r"\d+(?:,\d{3})*(?:\.\d+)?", raw_value)
+    if not matches:
+        return None
+
+    return float(matches[0].replace(',', ''))
+
+def normalize_listing(listing: Dict[str, Any], default_id: Optional[str] = None, is_user_listing: bool = False, user_email: Optional[str] = None) -> Dict[str, Any]:
+    normalized = listing.copy()
+
+    if default_id is not None:
+        normalized['id'] = normalized.get('id', default_id)
+
+    normalized.setdefault('building', 'Untitled Listing')
+    normalized.setdefault('DormType', normalized.get('dormType', ''))
+    normalized.setdefault('DormStyle', normalized.get('dormStyle', ''))
+    normalized.setdefault('description', '')
+    normalized.setdefault('address', '')
+    normalized.setdefault('lookingFor', 'No preference')
+    normalized.setdefault('floorNumber', 'N/A')
+    normalized.setdefault('contactEmail', '')
+    normalized.setdefault('createdAt', normalized.get('created_at', '1970-01-01T00:00:00'))
+    normalized.setdefault('aboutRoommate', {'description': ''})
+    normalized.setdefault('dormFeatures', {'featuresAsString': ''})
+
+    if not normalized.get('TradeDescription'):
+        dorm_type = normalized.get('DormType', '').strip()
+        dorm_style = normalized.get('DormStyle', '').strip()
+        if dorm_type and dorm_style:
+            normalized['TradeDescription'] = f"{dorm_type} in a {dorm_style}"
+        elif dorm_type:
+            normalized['TradeDescription'] = dorm_type
+        else:
+            normalized['TradeDescription'] = normalized.get('building', 'Listing')
+
+    price_source = normalized.get('currentCost') or normalized.get('costDifference')
+    normalized['priceValue'] = parse_price_value(price_source)
+
+    if is_user_listing:
+        normalized['isUserListing'] = True
+    if user_email:
+        normalized['userEmail'] = user_email
+
+    return normalized
 
 def init_saml_auth(req):
     """Initialize SAML authentication"""
@@ -116,7 +171,7 @@ def prepare_flask_request(request: Request):
 
 def validate_bu_email(email: str) -> bool:
     """Validate that email is from bu.edu domain"""
-    return email.lower().endswith('@bu.edu')
+    return validate_email(email)
 
 @app.get("/")
 async def root():
@@ -422,28 +477,97 @@ async def get_dorm(dorm_id: str):
     raise HTTPException(status_code=404, detail="Dorm not found")
 
 @app.get("/api/listings")
-async def get_listings(_limit: Optional[int] = None):
-    """Get all listings (from JSON file + active user listings)"""
+async def get_listings(
+    _limit: Optional[int] = None,
+    q: Optional[str] = None,
+    min_price: Optional[float] = None,
+    max_price: Optional[float] = None,
+    dorm_type: Optional[str] = None,
+    dorm_style: Optional[str] = None,
+    sort: Optional[str] = None,
+):
+    """Get listings with optional search, filters, and sorting"""
     # Load from listings.json or database
     data = load_seed_data()
-    base_listings = data.get('listings', [])
+    seed_listings = data.get('listings', [])
+    merged_listings: List[Dict[str, Any]] = []
+
+    for index, listing in enumerate(seed_listings):
+        normalized = normalize_listing(listing, default_id=str(listing.get('id', f"seed_{index}")))
+        merged_listings.append(normalized)
     
     # Add active user listings
     for listing_id, listing_info in user_listings.items():
-        listing_data = listing_info['listing_data'].copy()
-        listing_data['id'] = listing_id
-        listing_data['userEmail'] = listing_info['user_email']
-        listing_data['isUserListing'] = True
-        base_listings.append(listing_data)
+        normalized = normalize_listing(
+            listing_info['listing_data'],
+            default_id=listing_id,
+            is_user_listing=True,
+            user_email=listing_info['user_email']
+        )
+        normalized['createdAt'] = listing_info.get('created_at', normalized.get('createdAt'))
+        merged_listings.append(normalized)
+
+    filtered_listings = merged_listings
+
+    if q:
+        query = q.strip().lower()
+        filtered_listings = [
+            listing for listing in filtered_listings
+            if query in " ".join([
+                str(listing.get('building', '')),
+                str(listing.get('TradeDescription', '')),
+                str(listing.get('DormType', '')),
+                str(listing.get('DormStyle', '')),
+                str(listing.get('description', '')),
+                str(listing.get('address', '')),
+                str(listing.get('lookingFor', '')),
+            ]).lower()
+        ]
+
+    if dorm_type:
+        filter_value = dorm_type.strip().lower()
+        filtered_listings = [
+            listing for listing in filtered_listings
+            if str(listing.get('DormType', '')).strip().lower() == filter_value
+        ]
+
+    if dorm_style:
+        filter_value = dorm_style.strip().lower()
+        filtered_listings = [
+            listing for listing in filtered_listings
+            if str(listing.get('DormStyle', '')).strip().lower() == filter_value
+        ]
+
+    if min_price is not None:
+        filtered_listings = [
+            listing for listing in filtered_listings
+            if listing.get('priceValue') is not None and listing['priceValue'] >= min_price
+        ]
+
+    if max_price is not None:
+        filtered_listings = [
+            listing for listing in filtered_listings
+            if listing.get('priceValue') is not None and listing['priceValue'] <= max_price
+        ]
+
+    sort_option = (sort or '').lower().strip()
+    if sort_option == 'price-asc':
+        filtered_listings = sorted(filtered_listings, key=lambda x: (x.get('priceValue') is None, x.get('priceValue') or 0))
+    elif sort_option == 'price-desc':
+        filtered_listings = sorted(filtered_listings, key=lambda x: (x.get('priceValue') is None, -(x.get('priceValue') or 0)))
+    elif sort_option == 'building-asc':
+        filtered_listings = sorted(filtered_listings, key=lambda x: str(x.get('building', '')).lower())
+    else:
+        filtered_listings = sorted(filtered_listings, key=lambda x: str(x.get('createdAt', '')), reverse=True)
     
     if _limit is not None and _limit >= 0:
-        return base_listings[:_limit]
+        return filtered_listings[:_limit]
 
-    return base_listings
+    return filtered_listings
 
 @app.post("/api/listings")
 async def create_listing(request: Request):
-    """Create a new listing (requires authentication, max 1 per user)"""
+    """Create a new listing (requires authentication)"""
     session_token = request.cookies.get('session_token')
     
     if not session_token or session_token not in sessions:
@@ -452,22 +576,14 @@ async def create_listing(request: Request):
     user_data = sessions[session_token]
     email = user_data['email']
     
-    # Check if user already has an active listing
-    for listing_id, listing_info in user_listings.items():
-        if listing_info['user_email'] == email:
-            raise HTTPException(
-                status_code=400, 
-                detail="You already have an active listing. Please delete it before creating a new one."
-            )
-    
     listing_data = await request.json()
+    listing_data['createdAt'] = datetime.now().isoformat()
     
     # Generate unique listing ID
     import uuid
     listing_id = f"user_{uuid.uuid4().hex[:8]}"
     
     # Store listing with user association
-    from datetime import datetime
     user_listings[listing_id] = {
         'user_email': email,
         'listing_data': listing_data,
@@ -486,18 +602,21 @@ async def get_listing(listing_id: str):
     # Check user listings first
     if listing_id in user_listings:
         listing_info = user_listings[listing_id]
-        listing_data = listing_info['listing_data'].copy()
-        listing_data['id'] = listing_id
-        listing_data['userEmail'] = listing_info['user_email']
-        listing_data['isUserListing'] = True
+        listing_data = normalize_listing(
+            listing_info['listing_data'],
+            default_id=listing_id,
+            is_user_listing=True,
+            user_email=listing_info['user_email']
+        )
+        listing_data['createdAt'] = listing_info.get('created_at', listing_data.get('createdAt'))
         return listing_data
     
     # Fall back to listings.json
     data = load_seed_data()
     listings = data.get('listings', [])
-    for listing in listings:
+    for index, listing in enumerate(listings):
         if listing.get('id') == listing_id:
-            return listing
+            return normalize_listing(listing, default_id=str(listing.get('id', f"seed_{index}")))
     
     raise HTTPException(status_code=404, detail="Listing not found")
 

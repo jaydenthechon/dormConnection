@@ -20,8 +20,8 @@ const App = () => {
         <Route path="/listings" element={<ListingPage />} />
         <Route path="/add-listings" element={<AddListingPage />} />
         <Route path="/listings/:id" element={<SingleListing />} loader={listingLoader} />
-        <Route path="/Explore-Dorms" element={<ExploreDorms />} />
-        <Route path="/Dorms/:id" element={<SingleDorm />} loader={dormLoader} />
+        <Route path="/explore-dorms" element={<ExploreDorms />} />
+        <Route path="/dorms/:id" element={<SingleDorm />} loader={dormLoader} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="*" element={<NotFound />} />
       </Route>

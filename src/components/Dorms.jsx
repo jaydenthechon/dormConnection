@@ -36,6 +36,8 @@ const Dorms = () => {
             <h2>Loading...</h2>
           ) : error ? (
             <h2 className="text-red-500">{error}</h2>
+          ) : dorms.length === 0 ? (
+            <h2 className="text-gray-600">No dorm data available.</h2>
           ) : (
             dorms.map((Dorms) => <Dorm key={Dorms.id} dorm={Dorms} />)
           )}

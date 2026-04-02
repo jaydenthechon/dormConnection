@@ -1,9 +1,9 @@
-# Quick Start - SAML Authentication
+# Quick Start - Local Development
 
 ## Prerequisites
 - Python 3.8+
 - Node.js 16+
-- BU email (@bu.edu)
+- Gmail account for Google sign-in
 
 ## Setup
 
@@ -22,15 +22,14 @@
    cp .env.example .env
    ```
 
-4. **Configure SAML settings:**
-   - See `SAML_SETUP.md` for detailed configuration
-   - Contact BU IT to get IdP certificate and register your app
+4. **Configure OAuth environment variables:**
+   - Set Google OAuth values in your `.env` file for local auth testing
 
 ## Running
 
 1. **Start backend (Terminal 1):**
    ```bash
-   python main.py
+   npm run api
    ```
    Runs on http://localhost:8000
 
@@ -43,12 +42,21 @@
 3. **Access the app:**
    - Open http://localhost:5173
    - Click "Login"
-   - Sign in with your @bu.edu account
+   - Sign in with your Gmail account
+
+## Optional Mock Server
+
+If you want the legacy JSON mock server for static testing only:
+
+```bash
+npm run mock-server
+```
+
+This runs on http://localhost:9000 and is not the FastAPI backend used by the app.
 
 ## Features
 
-✅ SAML2 authentication with BU Shibboleth  
-✅ @bu.edu email validation only  
+✅ Google OAuth login  
 ✅ Protected routes  
 ✅ Session management  
 ✅ Automatic logout
@@ -56,9 +64,8 @@
 ## Important Notes
 
 - **Development:** Uses HTTP for local testing
-- **Production:** MUST use HTTPS (SAML requirement)
-- **BU Registration:** Required before production use
-- See `SAML_SETUP.md` for complete documentation
+- **Production:** Use HTTPS and correct frontend/backend environment variables
+- If listings fail locally, ensure nothing except FastAPI is listening on port 8000
 
 ## Need Help?
 
