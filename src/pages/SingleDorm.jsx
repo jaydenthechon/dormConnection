@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams, useLoaderData } from 'react-router-dom';
 import { FaArrowLeft, FaMapMarker } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { buildApiUrl } from '../utils/api';
 
 
 {/** For each dorm selected from the dorm listing, it shows a detailed version of the specifics of the dorm (NOT INPUTTED LISTING) */}
@@ -22,7 +23,7 @@ const SingleDorm = () => {
     <>
       <section>
         <div className="container m-auto py-6 px-6">
-          <Link to="/Explore-Dorms" className="text-indigo-500 hover:text-indigo-600 flex items-center">
+          <Link to="/explore-dorms" className="text-indigo-500 hover:text-indigo-600 flex items-center">
             <FaArrowLeft className='mr-2' /> Back to Dorms
           </Link>
         </div>
@@ -93,7 +94,7 @@ const SingleDorm = () => {
 };
 
 const dormLoader = async ({ params }) => {
-  const res = await fetch(`/api/Dorms/${params.id}`);
+  const res = await fetch(buildApiUrl(`/api/Dorms/${params.id}`));
   const data = await res.json();
   return data;
 };

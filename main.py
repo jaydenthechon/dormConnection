@@ -6,18 +6,70 @@ import time
 from dotenv import load_dotenv
 from urllib.parse import urlparse, urlencode
 import json
+import re
+from typing import Any, Dict, List, Optional
+from datetime import datetime
 from google.oauth2 import id_token
 from google.auth.transport import requests as google_requests
 from google_auth_oauthlib.flow import Flow
+
+try:
+    from onelogin.saml2.auth import OneLogin_Saml2_Auth
+except ImportError:
+    OneLogin_Saml2_Auth = None
 
 load_dotenv()
 
 app = FastAPI()
 
-# CORS configuration for development
+def normalize_url(url: str) -> str:
+    return url.rstrip('/')
+
+def get_frontend_url() -> str:
+    return normalize_url(os.getenv('FRONTEND_URL', 'http://localhost:5173'))
+
+def get_allowed_origins() -> List[str]:
+    configured_origins = ['http://localhost:5173', get_frontend_url()]
+    extra_origins = os.getenv('FRONTEND_URLS', '')
+
+    if extra_origins:
+        configured_origins.extend(
+            [origin.strip() for origin in extra_origins.split(',') if origin.strip()]
+        )
+
+    deduped_origins: List[str] = []
+    seen = set()
+    for origin in configured_origins:
+        normalized = normalize_url(origin)
+        if normalized and normalized not in seen:
+            deduped_origins.append(normalized)
+            seen.add(normalized)
+
+    return deduped_origins
+
+def get_cookie_settings(request: Request) -> Dict[str, Any]:
+    is_production = os.getenv('ENVIRONMENT', '').lower() == 'production' or os.getenv('RENDER') == 'true'
+    secure_cookie = request.url.scheme == 'https' or is_production
+
+    return {
+        'secure': secure_cookie,
+        'samesite': 'none' if secure_cookie else 'lax',
+    }
+
+def load_seed_data() -> Dict[str, Any]:
+    seed_file_path = os.path.join(os.path.dirname(__file__), 'src', 'listings.json')
+    try:
+        with open(seed_file_path, 'r') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {}
+
+# CORS configuration for development and production
+# Add your Vercel deployment URL after deploying frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Vite dev server
+    allow_origins=get_allowed_origins(),
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -40,13 +92,68 @@ GOOGLE_CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET')
 GOOGLE_REDIRECT_URI = os.getenv('GOOGLE_REDIRECT_URI', 'http://localhost:8000/api/auth/google/callback')
 
 def validate_email(email: str) -> bool:
-    """Validate that email is from allowed domain (gmail.com for testing)"""
-    # For testing, allow any gmail.com email
-    # In production, change this back to @bu.edu
-    return email.lower().endswith('@gmail.com')
+    """Validate email format for Google-authenticated users"""
+    return bool(email and '@' in email and '.' in email.split('@')[-1])
+
+def parse_price_value(raw_value: Any) -> Optional[float]:
+    if raw_value is None:
+        return None
+
+    if isinstance(raw_value, (int, float)):
+        return float(raw_value)
+
+    if not isinstance(raw_value, str):
+        return None
+
+    matches = re.findall(r"\d+(?:,\d{3})*(?:\.\d+)?", raw_value)
+    if not matches:
+        return None
+
+    return float(matches[0].replace(',', ''))
+
+def normalize_listing(listing: Dict[str, Any], default_id: Optional[str] = None, is_user_listing: bool = False, user_email: Optional[str] = None) -> Dict[str, Any]:
+    normalized = listing.copy()
+
+    if default_id is not None:
+        normalized['id'] = normalized.get('id', default_id)
+
+    normalized.setdefault('building', 'Untitled Listing')
+    normalized.setdefault('DormType', normalized.get('dormType', ''))
+    normalized.setdefault('DormStyle', normalized.get('dormStyle', ''))
+    normalized.setdefault('description', '')
+    normalized.setdefault('address', '')
+    normalized.setdefault('lookingFor', 'No preference')
+    normalized.setdefault('floorNumber', 'N/A')
+    normalized.setdefault('contactEmail', '')
+    normalized.setdefault('createdAt', normalized.get('created_at', '1970-01-01T00:00:00'))
+    normalized.setdefault('aboutRoommate', {'description': ''})
+    normalized.setdefault('dormFeatures', {'featuresAsString': ''})
+
+    if not normalized.get('TradeDescription'):
+        dorm_type = normalized.get('DormType', '').strip()
+        dorm_style = normalized.get('DormStyle', '').strip()
+        if dorm_type and dorm_style:
+            normalized['TradeDescription'] = f"{dorm_type} in a {dorm_style}"
+        elif dorm_type:
+            normalized['TradeDescription'] = dorm_type
+        else:
+            normalized['TradeDescription'] = normalized.get('building', 'Listing')
+
+    price_source = normalized.get('currentCost') or normalized.get('costDifference')
+    normalized['priceValue'] = parse_price_value(price_source)
+
+    if is_user_listing:
+        normalized['isUserListing'] = True
+    if user_email:
+        normalized['userEmail'] = user_email
+
+    return normalized
 
 def init_saml_auth(req):
     """Initialize SAML authentication"""
+    if OneLogin_Saml2_Auth is None:
+        raise HTTPException(status_code=500, detail="SAML support is not installed on the backend")
+
     auth = OneLogin_Saml2_Auth(req, custom_base_path=os.path.join(os.path.dirname(__file__), 'saml'))
     return auth
 
@@ -64,7 +171,7 @@ def prepare_flask_request(request: Request):
 
 def validate_bu_email(email: str) -> bool:
     """Validate that email is from bu.edu domain"""
-    return email.lower().endswith('@bu.edu')
+    return validate_email(email)
 
 @app.get("/")
 async def root():
@@ -111,13 +218,13 @@ async def google_callback(request: Request, code: str = None, error: str = None,
     """Handle Google OAuth callback"""
     if error:
         return RedirectResponse(
-            url=f"{os.getenv('FRONTEND_URL', 'http://localhost:5173')}/login?error=auth_cancelled",
+            url=f"{get_frontend_url()}/login?error=auth_cancelled",
             status_code=302
         )
     
     if not code:
         return RedirectResponse(
-            url=f"{os.getenv('FRONTEND_URL', 'http://localhost:5173')}/login?error=no_code",
+            url=f"{get_frontend_url()}/login?error=no_code",
             status_code=302
         )
     
@@ -158,7 +265,7 @@ async def google_callback(request: Request, code: str = None, error: str = None,
         # Validate email domain (gmail.com for testing)
         if not validate_email(email):
             return RedirectResponse(
-                url=f"{os.getenv('FRONTEND_URL', 'http://localhost:5173')}/login?error=invalid_domain",
+                url=f"{get_frontend_url()}/login?error=invalid_domain",
                 status_code=302
             )
         
@@ -172,7 +279,8 @@ async def google_callback(request: Request, code: str = None, error: str = None,
         }
         
         # Redirect to frontend with session token
-        frontend_url = os.getenv('FRONTEND_URL', 'http://localhost:5173')
+        frontend_url = get_frontend_url()
+        cookie_settings = get_cookie_settings(request)
         response = RedirectResponse(
             url=f"{frontend_url}/login?success=true",
             status_code=302
@@ -181,8 +289,8 @@ async def google_callback(request: Request, code: str = None, error: str = None,
             key="session_token",
             value=session_id,
             httponly=True,
-            secure=os.getenv('ENVIRONMENT') == 'production',
-            samesite='lax',
+            secure=cookie_settings['secure'],
+            samesite=cookie_settings['samesite'],
             max_age=3600 * 24  # 24 hours
         )
         return response
@@ -190,7 +298,7 @@ async def google_callback(request: Request, code: str = None, error: str = None,
     except Exception as e:
         print(f"Error during Google OAuth: {str(e)}")
         return RedirectResponse(
-            url=f"{os.getenv('FRONTEND_URL', 'http://localhost:5173')}/login?error=oauth_error",
+            url=f"{get_frontend_url()}/login?error=oauth_error",
             status_code=302
         )
 
@@ -252,7 +360,7 @@ async def saml_acs(request: Request):
             # Validate BU email domain
             if not validate_bu_email(email):
                 return RedirectResponse(
-                    url=f"{os.getenv('FRONTEND_URL', 'http://localhost:5173')}/login?error=invalid_domain",
+                    url=f"{get_frontend_url()}/login?error=invalid_domain",
                     status_code=302
                 )
             
@@ -266,7 +374,8 @@ async def saml_acs(request: Request):
             }
             
             # Redirect to frontend with session token
-            frontend_url = os.getenv('FRONTEND_URL', 'http://localhost:5173')
+            frontend_url = get_frontend_url()
+            cookie_settings = get_cookie_settings(request)
             response = RedirectResponse(
                 url=f"{frontend_url}/login?success=true",
                 status_code=302
@@ -275,20 +384,20 @@ async def saml_acs(request: Request):
                 key="session_token",
                 value=session_id,
                 httponly=True,
-                secure=os.getenv('ENVIRONMENT') == 'production',
-                samesite='lax',
+                secure=cookie_settings['secure'],
+                samesite=cookie_settings['samesite'],
                 max_age=3600 * 24  # 24 hours
             )
             return response
         else:
             return RedirectResponse(
-                url=f"{os.getenv('FRONTEND_URL', 'http://localhost:5173')}/login?error=not_authenticated",
+                url=f"{get_frontend_url()}/login?error=not_authenticated",
                 status_code=302
             )
     else:
         error_reason = auth.get_last_error_reason()
         return RedirectResponse(
-            url=f"{os.getenv('FRONTEND_URL', 'http://localhost:5173')}/login?error=saml_error",
+            url=f"{get_frontend_url()}/login?error=saml_error",
             status_code=302
         )
 
@@ -341,33 +450,124 @@ async def logout(request: Request):
         del sessions[session_token]
     
     response = JSONResponse(content={"message": "Logged out successfully"})
-    response.delete_cookie("session_token")
+    cookie_settings = get_cookie_settings(request)
+    response.delete_cookie(
+        "session_token",
+        secure=cookie_settings['secure'],
+        samesite=cookie_settings['samesite']
+    )
     return response
 
+@app.get("/api/Dorms")
+async def get_dorms():
+    """Get all dorm records from the seed JSON file"""
+    data = load_seed_data()
+    return data.get('Dorms', [])
+
+@app.get("/api/Dorms/{dorm_id}")
+async def get_dorm(dorm_id: str):
+    """Get a specific dorm record by ID"""
+    data = load_seed_data()
+    dorms = data.get('Dorms', [])
+
+    for dorm in dorms:
+        if str(dorm.get('id')) == dorm_id:
+            return dorm
+
+    raise HTTPException(status_code=404, detail="Dorm not found")
+
 @app.get("/api/listings")
-async def get_listings():
-    """Get all listings (from JSON file + active user listings)"""
+async def get_listings(
+    _limit: Optional[int] = None,
+    q: Optional[str] = None,
+    min_price: Optional[float] = None,
+    max_price: Optional[float] = None,
+    dorm_type: Optional[str] = None,
+    dorm_style: Optional[str] = None,
+    sort: Optional[str] = None,
+):
+    """Get listings with optional search, filters, and sorting"""
     # Load from listings.json or database
-    try:
-        with open('src/listings.json', 'r') as f:
-            data = json.load(f)
-        base_listings = data.get('listings', [])
-    except FileNotFoundError:
-        base_listings = []
+    data = load_seed_data()
+    seed_listings = data.get('listings', [])
+    merged_listings: List[Dict[str, Any]] = []
+
+    for index, listing in enumerate(seed_listings):
+        normalized = normalize_listing(listing, default_id=str(listing.get('id', f"seed_{index}")))
+        merged_listings.append(normalized)
     
     # Add active user listings
     for listing_id, listing_info in user_listings.items():
-        listing_data = listing_info['listing_data'].copy()
-        listing_data['id'] = listing_id
-        listing_data['userEmail'] = listing_info['user_email']
-        listing_data['isUserListing'] = True
-        base_listings.append(listing_data)
+        normalized = normalize_listing(
+            listing_info['listing_data'],
+            default_id=listing_id,
+            is_user_listing=True,
+            user_email=listing_info['user_email']
+        )
+        normalized['createdAt'] = listing_info.get('created_at', normalized.get('createdAt'))
+        merged_listings.append(normalized)
+
+    filtered_listings = merged_listings
+
+    if q:
+        query = q.strip().lower()
+        filtered_listings = [
+            listing for listing in filtered_listings
+            if query in " ".join([
+                str(listing.get('building', '')),
+                str(listing.get('TradeDescription', '')),
+                str(listing.get('DormType', '')),
+                str(listing.get('DormStyle', '')),
+                str(listing.get('description', '')),
+                str(listing.get('address', '')),
+                str(listing.get('lookingFor', '')),
+            ]).lower()
+        ]
+
+    if dorm_type:
+        filter_value = dorm_type.strip().lower()
+        filtered_listings = [
+            listing for listing in filtered_listings
+            if str(listing.get('DormType', '')).strip().lower() == filter_value
+        ]
+
+    if dorm_style:
+        filter_value = dorm_style.strip().lower()
+        filtered_listings = [
+            listing for listing in filtered_listings
+            if str(listing.get('DormStyle', '')).strip().lower() == filter_value
+        ]
+
+    if min_price is not None:
+        filtered_listings = [
+            listing for listing in filtered_listings
+            if listing.get('priceValue') is not None and listing['priceValue'] >= min_price
+        ]
+
+    if max_price is not None:
+        filtered_listings = [
+            listing for listing in filtered_listings
+            if listing.get('priceValue') is not None and listing['priceValue'] <= max_price
+        ]
+
+    sort_option = (sort or '').lower().strip()
+    if sort_option == 'price-asc':
+        filtered_listings = sorted(filtered_listings, key=lambda x: (x.get('priceValue') is None, x.get('priceValue') or 0))
+    elif sort_option == 'price-desc':
+        filtered_listings = sorted(filtered_listings, key=lambda x: (x.get('priceValue') is None, -(x.get('priceValue') or 0)))
+    elif sort_option == 'building-asc':
+        filtered_listings = sorted(filtered_listings, key=lambda x: str(x.get('building', '')).lower())
+    else:
+        filtered_listings = sorted(filtered_listings, key=lambda x: str(x.get('createdAt', '')), reverse=True)
     
-    return base_listings
+    if _limit is not None and _limit >= 0:
+        return filtered_listings[:_limit]
+
+    return filtered_listings
 
 @app.post("/api/listings")
 async def create_listing(request: Request):
-    """Create a new listing (requires authentication, max 1 per user)"""
+    """Create a new listing (requires authentication)"""
     session_token = request.cookies.get('session_token')
     
     if not session_token or session_token not in sessions:
@@ -376,22 +576,14 @@ async def create_listing(request: Request):
     user_data = sessions[session_token]
     email = user_data['email']
     
-    # Check if user already has an active listing
-    for listing_id, listing_info in user_listings.items():
-        if listing_info['user_email'] == email:
-            raise HTTPException(
-                status_code=400, 
-                detail="You already have an active listing. Please delete it before creating a new one."
-            )
-    
     listing_data = await request.json()
+    listing_data['createdAt'] = datetime.now().isoformat()
     
     # Generate unique listing ID
     import uuid
     listing_id = f"user_{uuid.uuid4().hex[:8]}"
     
     # Store listing with user association
-    from datetime import datetime
     user_listings[listing_id] = {
         'user_email': email,
         'listing_data': listing_data,
@@ -410,22 +602,21 @@ async def get_listing(listing_id: str):
     # Check user listings first
     if listing_id in user_listings:
         listing_info = user_listings[listing_id]
-        listing_data = listing_info['listing_data'].copy()
-        listing_data['id'] = listing_id
-        listing_data['userEmail'] = listing_info['user_email']
-        listing_data['isUserListing'] = True
+        listing_data = normalize_listing(
+            listing_info['listing_data'],
+            default_id=listing_id,
+            is_user_listing=True,
+            user_email=listing_info['user_email']
+        )
+        listing_data['createdAt'] = listing_info.get('created_at', listing_data.get('createdAt'))
         return listing_data
     
     # Fall back to listings.json
-    try:
-        with open('src/listings.json', 'r') as f:
-            data = json.load(f)
-        listings = data.get('listings', [])
-        for listing in listings:
-            if listing.get('id') == listing_id:
-                return listing
-    except FileNotFoundError:
-        pass
+    data = load_seed_data()
+    listings = data.get('listings', [])
+    for index, listing in enumerate(listings):
+        if listing.get('id') == listing_id:
+            return normalize_listing(listing, default_id=str(listing.get('id', f"seed_{index}")))
     
     raise HTTPException(status_code=404, detail="Listing not found")
 

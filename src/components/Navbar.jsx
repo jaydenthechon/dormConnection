@@ -17,7 +17,7 @@ const Navbar = () => {
     window.location.href = '/login';
   };
 
-  const navLinks = ['/', '/Listings', '/Add-listings', '/Explore-Dorms'];
+  const navLinks = ['/', '/listings', '/add-listings', '/explore-dorms'];
   
   return (
     <nav className="bg-indigo-700 border-b border-indigo-500 fixed top-0 left-0 w-full z-50">

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Dorm from './Dorm';
+import { buildApiUrl } from '../utils/api';
 
 //Structure for the list of Dorms on campus
 const Dorms = () => {
@@ -11,7 +12,7 @@ const Dorms = () => {
     const fetchDorms = async () => {
       const apiUrl = '/api/Dorms';
       try {
-        const res = await fetch(apiUrl);
+        const res = await fetch(buildApiUrl(apiUrl));
         if (!res.ok) throw new Error('Error fetching dorm data');
         const data = await res.json();
         setDorms(data);
@@ -35,6 +36,8 @@ const Dorms = () => {
             <h2>Loading...</h2>
           ) : error ? (
             <h2 className="text-red-500">{error}</h2>
+          ) : dorms.length === 0 ? (
+            <h2 className="text-gray-600">No dorm data available.</h2>
           ) : (
             dorms.map((Dorms) => <Dorm key={Dorms.id} dorm={Dorms} />)
           )}

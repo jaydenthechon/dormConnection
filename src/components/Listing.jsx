@@ -8,9 +8,10 @@ import { Link } from 'react-router-dom';
 const Listing = ({ listing }) => {
   const [showFullDescription, setShowFullDescription] = useState(false);
 
-  let description = listing.description;
+  let description = listing.description || 'No description provided yet.';
+  const displayedPrice = listing.currentCost || listing.costDifference || 'Contact for price';
 
-  if (!showFullDescription) {
+  if (!showFullDescription && description.length > 90) {
     description = description.substring(0, 90) + '...';
   }
 
@@ -19,19 +20,22 @@ const Listing = ({ listing }) => {
       <div className="p-4">
         <div className="mb-6">
           <div className="text-gray-600 my-2">{listing.building}</div>
-          <h3 className="text-xl font-bold">{listing.DormType}</h3>
+          <h3 className="text-xl font-bold">{listing.DormType || 'Room Listing'}</h3>
+          <p className="text-sm text-gray-500 mt-1">{listing.DormStyle || 'Flexible style'}{listing.floorNumber ? ` • Floor ${listing.floorNumber}` : ''}</p>
         </div>
 
         <div className="mb-5">{description}</div>
 
-        <button
-          onClick={() => setShowFullDescription((prevState) => !prevState)}
-          className="text-indigo-500 mb-5 hover:text-indigo-600"
-        >
-          {showFullDescription ? 'Less' : 'More'}
-        </button>
+        {listing.description && listing.description.length > 90 && (
+          <button
+            onClick={() => setShowFullDescription((prevState) => !prevState)}
+            className="text-indigo-500 mb-5 hover:text-indigo-600"
+          >
+            {showFullDescription ? 'Less' : 'More'}
+          </button>
+        )}
 
-        <h3 className="text-indigo-500 mb-2">{listing.costDifference} / Year</h3>
+        <h3 className="text-indigo-500 mb-2">{displayedPrice} / Year</h3>
 
         <div className="border border-gray-100 mb-5"></div>
 

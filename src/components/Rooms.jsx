@@ -12,7 +12,7 @@ const Rooms = () => {
           <div className="bg-gray-100 p-6 rounded-lg shadow-md">
             <h2 className="text-2xl font-bold">Looking for Swap?</h2>
             <p className="mt-2 mb-4">
-              Browse our listings and reach out to the residents!
+              Browse BU dorm listings, use filters, and reach out to residents directly.
             </p>
             <Link
               to="/listings"
@@ -22,12 +22,12 @@ const Rooms = () => {
             </Link>
           </div>
           <div className="bg-indigo-100 p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold">Offer Room</h2>
+            <h2 className="text-2xl font-bold">Offer Your BU Dorm</h2>
             <p className="mt-2 mb-4">
-              List your dorm so people can swap with you
+              Post your BU room details so the right swap candidate can find you.
             </p>
             <Link
-              to="/Add-listings"
+              to="/add-listings"
               className="inline-block bg-indigo-500 text-white rounded-lg px-4 py-2 hover:bg-indigo-600"
             >
               Add Listing
