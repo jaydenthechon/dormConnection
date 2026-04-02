@@ -37,6 +37,8 @@ In Render dashboard, add these environment variables:
 - `GOOGLE_CLIENT_SECRET`: (copy from your .env file)
 - `GOOGLE_REDIRECT_URI`: `https://dormconnection-api.onrender.com/api/auth/google/callback`
   (Replace `dormconnection-api` with your actual Render service name)
+- `FRONTEND_URL`: `https://your-project.vercel.app`
+- `ENVIRONMENT`: `production`
 
 ### Step 4: Deploy
 - Click "Create Web Service"
@@ -68,25 +70,10 @@ In Vercel project settings → Environment Variables:
 
 ---
 
-## Part 3: Update Backend CORS
+## Part 3: Backend CORS/Cookies
 
-### Update main.py
-Replace the Vercel wildcard with your actual frontend URL:
-```python
-allow_origins=[
-    "http://localhost:5173",  # Local development
-    "https://your-project.vercel.app",  # Your production URL
-],
-```
-
-Commit and push:
-```bash
-git add main.py
-git commit -m "Update CORS for production"
-git push origin winterbreak
-```
-
-Render will auto-deploy the update.
+The backend now reads CORS and redirect settings from environment variables.
+Set `FRONTEND_URL` and `ENVIRONMENT=production` in Render (Step 3 above), then redeploy.
 
 ---
 
@@ -132,7 +119,7 @@ This would persist data between restarts.
 ### OAuth Errors
 - Verify redirect URI exactly matches in Google Console
 - Check CORS includes your Vercel URL
-- Ensure credentials are set in Render environment variables
+- Ensure `FRONTEND_URL` and Google credentials are set in Render environment variables
 
 ### API Connection Issues
 - Check `VITE_API_URL` in Vercel

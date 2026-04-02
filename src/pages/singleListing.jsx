@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams, useLoaderData } from 'react-router-dom';
 import { FaArrowLeft , FaMapMarker} from 'react-icons/fa';
 import {Link} from 'react-router-dom'
+import { buildApiUrl } from '../utils/api';
 {/** Shows the information for a single listing that students input */}
 const SingleListing = () => {
   const { id } = useParams();
@@ -105,7 +106,7 @@ const SingleListing = () => {
 };
 
 const listingLoader = async ({params}) => {
-  const res = await fetch(`/api/listings/${params.id}`)
+  const res = await fetch(buildApiUrl(`/api/listings/${params.id}`))
   const data = await res.json()
   return data
 }

@@ -6,23 +6,67 @@ import time
 from dotenv import load_dotenv
 from urllib.parse import urlparse, urlencode
 import json
+from typing import Any, Dict, List, Optional
 from google.oauth2 import id_token
 from google.auth.transport import requests as google_requests
 from google_auth_oauthlib.flow import Flow
+
+try:
+    from onelogin.saml2.auth import OneLogin_Saml2_Auth
+except ImportError:
+    OneLogin_Saml2_Auth = None
 
 load_dotenv()
 
 app = FastAPI()
 
+def normalize_url(url: str) -> str:
+    return url.rstrip('/')
+
+def get_frontend_url() -> str:
+    return normalize_url(os.getenv('FRONTEND_URL', 'http://localhost:5173'))
+
+def get_allowed_origins() -> List[str]:
+    configured_origins = ['http://localhost:5173', get_frontend_url()]
+    extra_origins = os.getenv('FRONTEND_URLS', '')
+
+    if extra_origins:
+        configured_origins.extend(
+            [origin.strip() for origin in extra_origins.split(',') if origin.strip()]
+        )
+
+    deduped_origins: List[str] = []
+    seen = set()
+    for origin in configured_origins:
+        normalized = normalize_url(origin)
+        if normalized and normalized not in seen:
+            deduped_origins.append(normalized)
+            seen.add(normalized)
+
+    return deduped_origins
+
+def get_cookie_settings(request: Request) -> Dict[str, Any]:
+    is_production = os.getenv('ENVIRONMENT', '').lower() == 'production' or os.getenv('RENDER') == 'true'
+    secure_cookie = request.url.scheme == 'https' or is_production
+
+    return {
+        'secure': secure_cookie,
+        'samesite': 'none' if secure_cookie else 'lax',
+    }
+
+def load_seed_data() -> Dict[str, Any]:
+    try:
+        with open('src/listings.json', 'r') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {}
+
 # CORS configuration for development and production
 # Add your Vercel deployment URL after deploying frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",  # Local development
-        "https://dorm-connection.vercel.app/",   # Vercel preview deployments
-        # Add your production URL here after deployment
-    ],
+    allow_origins=get_allowed_origins(),
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -52,6 +96,9 @@ def validate_email(email: str) -> bool:
 
 def init_saml_auth(req):
     """Initialize SAML authentication"""
+    if OneLogin_Saml2_Auth is None:
+        raise HTTPException(status_code=500, detail="SAML support is not installed on the backend")
+
     auth = OneLogin_Saml2_Auth(req, custom_base_path=os.path.join(os.path.dirname(__file__), 'saml'))
     return auth
 
@@ -116,13 +163,13 @@ async def google_callback(request: Request, code: str = None, error: str = None,
     """Handle Google OAuth callback"""
     if error:
         return RedirectResponse(
-            url=f"{os.getenv('FRONTEND_URL', 'http://localhost:5173')}/login?error=auth_cancelled",
+            url=f"{get_frontend_url()}/login?error=auth_cancelled",
             status_code=302
         )
     
     if not code:
         return RedirectResponse(
-            url=f"{os.getenv('FRONTEND_URL', 'http://localhost:5173')}/login?error=no_code",
+            url=f"{get_frontend_url()}/login?error=no_code",
             status_code=302
         )
     
@@ -163,7 +210,7 @@ async def google_callback(request: Request, code: str = None, error: str = None,
         # Validate email domain (gmail.com for testing)
         if not validate_email(email):
             return RedirectResponse(
-                url=f"{os.getenv('FRONTEND_URL', 'http://localhost:5173')}/login?error=invalid_domain",
+                url=f"{get_frontend_url()}/login?error=invalid_domain",
                 status_code=302
             )
         
@@ -177,7 +224,8 @@ async def google_callback(request: Request, code: str = None, error: str = None,
         }
         
         # Redirect to frontend with session token
-        frontend_url = os.getenv('FRONTEND_URL', 'http://localhost:5173')
+        frontend_url = get_frontend_url()
+        cookie_settings = get_cookie_settings(request)
         response = RedirectResponse(
             url=f"{frontend_url}/login?success=true",
             status_code=302
@@ -186,8 +234,8 @@ async def google_callback(request: Request, code: str = None, error: str = None,
             key="session_token",
             value=session_id,
             httponly=True,
-            secure=os.getenv('ENVIRONMENT') == 'production',
-            samesite='lax',
+            secure=cookie_settings['secure'],
+            samesite=cookie_settings['samesite'],
             max_age=3600 * 24  # 24 hours
         )
         return response
@@ -195,7 +243,7 @@ async def google_callback(request: Request, code: str = None, error: str = None,
     except Exception as e:
         print(f"Error during Google OAuth: {str(e)}")
         return RedirectResponse(
-            url=f"{os.getenv('FRONTEND_URL', 'http://localhost:5173')}/login?error=oauth_error",
+            url=f"{get_frontend_url()}/login?error=oauth_error",
             status_code=302
         )
 
@@ -257,7 +305,7 @@ async def saml_acs(request: Request):
             # Validate BU email domain
             if not validate_bu_email(email):
                 return RedirectResponse(
-                    url=f"{os.getenv('FRONTEND_URL', 'http://localhost:5173')}/login?error=invalid_domain",
+                    url=f"{get_frontend_url()}/login?error=invalid_domain",
                     status_code=302
                 )
             
@@ -271,7 +319,8 @@ async def saml_acs(request: Request):
             }
             
             # Redirect to frontend with session token
-            frontend_url = os.getenv('FRONTEND_URL', 'http://localhost:5173')
+            frontend_url = get_frontend_url()
+            cookie_settings = get_cookie_settings(request)
             response = RedirectResponse(
                 url=f"{frontend_url}/login?success=true",
                 status_code=302
@@ -280,20 +329,20 @@ async def saml_acs(request: Request):
                 key="session_token",
                 value=session_id,
                 httponly=True,
-                secure=os.getenv('ENVIRONMENT') == 'production',
-                samesite='lax',
+                secure=cookie_settings['secure'],
+                samesite=cookie_settings['samesite'],
                 max_age=3600 * 24  # 24 hours
             )
             return response
         else:
             return RedirectResponse(
-                url=f"{os.getenv('FRONTEND_URL', 'http://localhost:5173')}/login?error=not_authenticated",
+                url=f"{get_frontend_url()}/login?error=not_authenticated",
                 status_code=302
             )
     else:
         error_reason = auth.get_last_error_reason()
         return RedirectResponse(
-            url=f"{os.getenv('FRONTEND_URL', 'http://localhost:5173')}/login?error=saml_error",
+            url=f"{get_frontend_url()}/login?error=saml_error",
             status_code=302
         )
 
@@ -346,19 +395,38 @@ async def logout(request: Request):
         del sessions[session_token]
     
     response = JSONResponse(content={"message": "Logged out successfully"})
-    response.delete_cookie("session_token")
+    cookie_settings = get_cookie_settings(request)
+    response.delete_cookie(
+        "session_token",
+        secure=cookie_settings['secure'],
+        samesite=cookie_settings['samesite']
+    )
     return response
 
+@app.get("/api/Dorms")
+async def get_dorms():
+    """Get all dorm records from the seed JSON file"""
+    data = load_seed_data()
+    return data.get('Dorms', [])
+
+@app.get("/api/Dorms/{dorm_id}")
+async def get_dorm(dorm_id: str):
+    """Get a specific dorm record by ID"""
+    data = load_seed_data()
+    dorms = data.get('Dorms', [])
+
+    for dorm in dorms:
+        if str(dorm.get('id')) == dorm_id:
+            return dorm
+
+    raise HTTPException(status_code=404, detail="Dorm not found")
+
 @app.get("/api/listings")
-async def get_listings():
+async def get_listings(_limit: Optional[int] = None):
     """Get all listings (from JSON file + active user listings)"""
     # Load from listings.json or database
-    try:
-        with open('src/listings.json', 'r') as f:
-            data = json.load(f)
-        base_listings = data.get('listings', [])
-    except FileNotFoundError:
-        base_listings = []
+    data = load_seed_data()
+    base_listings = data.get('listings', [])
     
     # Add active user listings
     for listing_id, listing_info in user_listings.items():
@@ -368,6 +436,9 @@ async def get_listings():
         listing_data['isUserListing'] = True
         base_listings.append(listing_data)
     
+    if _limit is not None and _limit >= 0:
+        return base_listings[:_limit]
+
     return base_listings
 
 @app.post("/api/listings")
@@ -422,15 +493,11 @@ async def get_listing(listing_id: str):
         return listing_data
     
     # Fall back to listings.json
-    try:
-        with open('src/listings.json', 'r') as f:
-            data = json.load(f)
-        listings = data.get('listings', [])
-        for listing in listings:
-            if listing.get('id') == listing_id:
-                return listing
-    except FileNotFoundError:
-        pass
+    data = load_seed_data()
+    listings = data.get('listings', [])
+    for listing in listings:
+        if listing.get('id') == listing_id:
+            return listing
     
     raise HTTPException(status_code=404, detail="Listing not found")
 

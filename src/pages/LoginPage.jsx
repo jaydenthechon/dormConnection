@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { buildApiUrl } from '../utils/api';
 
 const LoginPage = () => {
   const [searchParams] = useSearchParams();
@@ -24,7 +25,7 @@ const LoginPage = () => {
       setError('No authorization code received.');
     } else if (successParam === 'true') {
       // Check if user is authenticated
-      fetch('/api/auth/user', {
+      fetch(buildApiUrl('/api/auth/user'), {
         credentials: 'include'
       })
         .then(res => res.json())
@@ -42,7 +43,7 @@ const LoginPage = () => {
   const handleGoogleLogin = () => {
     setLoading(true);
     // Redirect to Google OAuth login endpoint
-    window.location.href = '/api/auth/google/login';
+    window.location.href = buildApiUrl('/api/auth/google/login');
   };
 
   return (

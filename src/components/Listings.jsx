@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Listing from './Listing';
+import { buildApiUrl } from '../utils/api';
 
 //A page that shows multiple listings 
 const Listings = ({ isHome = false }) => {
@@ -11,7 +12,7 @@ const Listings = ({ isHome = false }) => {
     const fetchListings = async () => {
       const apiUrl = isHome ? '/api/listings?_limit=3' : '/api/listings'; //if at home page then only show 3 listings (recency?)
       try {
-        const res = await fetch(apiUrl);
+        const res = await fetch(buildApiUrl(apiUrl));
         const data = await res.json();
         setListing(data);
       } catch (error) {

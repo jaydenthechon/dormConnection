@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { buildApiUrl } from '../utils/api'
 
 {/* Filling out the form for adding a new listing */}
 const AddListingPage = ({ addListingSubmit }) => {
@@ -48,7 +49,7 @@ const AddListingPage = ({ addListingSubmit }) => {
       }
 
       try {
-        const response = await fetch('/api/auth/user', {
+        const response = await fetch(buildApiUrl('/api/auth/user'), {
           credentials: 'include'
         })
         
@@ -73,7 +74,7 @@ const AddListingPage = ({ addListingSubmit }) => {
     if (!existingListingId) return
     
     try {
-      const response = await fetch(`/api/listings/${existingListingId}`, {
+      const response = await fetch(buildApiUrl(`/api/listings/${existingListingId}`), {
         method: 'DELETE',
         credentials: 'include'
       })
@@ -221,7 +222,7 @@ const AddListingPage = ({ addListingSubmit }) => {
     }
 
     try {
-      const response = await fetch('/api/listings', {
+      const response = await fetch(buildApiUrl('/api/listings'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
